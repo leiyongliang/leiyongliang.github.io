@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>拖拽</title>
+	<style type="text/css">
+	#div1{
+		width: 200px;
+		height: 200px;
+		background: radial-gradient(#fff, yellow);
+		position: absolute;
+		cursor: move;
+		border-radius: 100px;
+		line-height: 200px;
+		text-align: center;
+		color: #fff;
+		font-size: 20px;
+	}
+	#div2{
+		left: 300px;
+		width: 200px;
+		height: 200px;
+		background: radial-gradient(#fff, blue);
+		position: absolute;
+		cursor: move;
+		border-radius: 100px;
+		line-height: 200px;
+		text-align: center;
+		color: #fff;
+		font-size: 20px;
+	}
+	#div3{
+		left: 300px;
+		top:300px;
+		width: 200px;
+		height: 200px;
+		background:green;
+		position: absolute;
+		cursor: move;
+		border-radius: 100px;
+		line-height: 200px;
+		text-align: center;
+		color: #fff;
+		font-size: 20px;
+	}
+	#div4{
+		left: 500px;
+		top:300px;
+		width: 200px;
+		height: 200px;
+		background:green;
+		position: absolute;
+		cursor: move;
+		border-radius: 100px;
+		line-height: 200px;
+		text-align: center;
+		color: #fff;
+		font-size: 20px;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload = function() {
+		// var oDiv = document.getElementById('div1');
+
+		// oDiv.onmousedown = function(ev) {
+		// 	var oEvent = ev||window.event;
+
+		// 	var disX = oEvent.clientX-oDiv.offsetLeft;
+		// 	var disY = oEvent.clientY-oDiv.offsetTop;
+
+		// 	document.onmousemove = function(ev){
+		// 		var ev = ev||window.event;
+		// 		oDiv.style.left = ev.clientX-disX+'px';
+		// 		oDiv.style.top = ev.clientY-disY+'px';
+		// 	} 
+
+		// 	document.onmouseup = function() {
+		// 	document.onmousemove = null;
+		// 	document.onmouseup = null;
+		// 	}
+		// }
+	    balls = document.getElementsByTagName('div');
+		var ball = new Drop('div1');
+		ball.fnautomove();
+		ball.pz(balls);
+		var ball2 = new LimitDrop('div2');
+		ball2.fnautomove();
+		ball2.pz(balls);
+		// var ball3 = new Drop('div3');
+		// ball3.fnautomove();
+		// // ball3.pz(balls);
+		// var ball4 = new Drop('div4');
+		// ball4.fnautomove();
+		// ball4.pz(balls);
+		// new LimitDrop('div2').fnautomove();
+	}
+
+	function Drop(id) {
+		this.disX = 0;
+		this.disY = 0;
+		this.speedX = 1;
+		this.speedY = 1;
+		var _this = this;
+
+		this.oDiv = document.getElementById(id);
+
+		this.oDiv.onmousedown = function(ev) {
+			_this.fndown(ev);
+
+			return false;
+		}
+	}
+
+	Drop.prototype.fndown = function(ev){
+		var e = ev||window.event;
+		this.disX = e.clientX-this.oDiv.offsetLeft;
+		this.disY = e.clientY-this.oDiv.offsetTop;
+		var _this = this;
+
+		document.onmousemove = function(ev){
+			_this.fnmove(ev);
+		}
+
+		document.onmouseup = function(){
+			_this.fnup();
+		}
+	}
+	Drop.prototype.fnmove = function(ev){
+		var e = ev||window.event;
+
+		this.oDiv.style.top = e.clientY-this.disY+'px';
+		this.oDiv.style.left = e.clientX-this.disX+'px';
+	}
+	Drop.prototype.fnup = function(){
+		document.onmousemove = null;
+		document.onmouseup = null;
+	}
+	Drop.prototype.fnautomove = function() {	
+		var _this = this;
+		setInterval(function(){
+			var top = _this.oDiv.offsetTop;
+			var left = _this.oDiv.offsetLeft;
+			if(top<0||top>document.documentElement.clientHeight-_this.oDiv.offsetHeight) {
+				_this.speedY = -_this.speedY;
+			}
+			if(left<0||left>document.documentElement.clientWidth-_this.oDiv.offsetWidth){
+				_this.speedX = -_this.speedX;
+			}
+			top += _this.speedY;
+			left+=_this.speedX;
+			_this.oDiv.style.top = top+'px';
+			_this.oDiv.style.left = left+'px';
+		},10)
+	}
+
+	Drop.prototype.pz = function(balls){
+		var _this = this;
+		setInterval(function() {
+			var zjc = [];
+			for(var i = 0;i<balls.length-1;i++){
+					var y =(parseInt(balls[i].offsetTop)+parseInt(balls[i].offsetHeight)/2)-(parseInt(balls[i+1].offsetTop)+parseInt(balls[i+1].offsetHeight)/2);
+					var x = (parseInt(balls[i].offsetLeft)+parseInt(balls[i].offsetWidth)/2)-(parseInt(balls[i+1].offsetLeft)+parseInt(balls[i+1].offsetWidth)/2);
+				
+				// console.log(x)
+				zjc.push(Math.sqrt(x*x+y*y));
+			}
+			console.log(zjc)
+			for(var j=0;j<zjc.length;j++){				
+				if(zjc[j]<200){
+					
+					_this.speedX = -_this.speedX;
+
+					// _this.speedY = -_this.speedY
+				}
+			}
+		},0)
+	}
+
+	function LimitDrop(id) {
+		Drop.call(this,id);
+		this.speedX = -1;
+		this.speedY = -1;
+	}
+	for(var i in Drop.prototype){
+		LimitDrop.prototype[i] = Drop.prototype[i];
+	}
+
+	LimitDrop.prototype.fnmove = function(ev) {
+		var e = ev||window.event;
+		var left = e.clientX-this.disX;
+		var top = e.clientY-this.disY;
+		if(left<0){
+			left = 0;
+		}
+		else if(left>document.documentElement.clientWidth-this.oDiv.offsetWidth){
+			left = document.documentElement.clientWidth-this.oDiv.offsetWidth;
+		}
+		if(top<0){
+			top = 0;
+		}
+		else if(top>document.documentElement.clientHeight-this.oDiv.offsetHeight) {
+			top = document.documentElement.clientHeight-this.oDiv.offsetHeight;
+		}
+		
+			this.oDiv.style.top = top+'px';
+			this.oDiv.style.left = left+'px';	
+	}
+	
+
+
+	</script>
+</head>
+<body>
+<div id="div1">1</div>
+<div id="div2">2</div>
+<!-- <div id="div3">3</div>
+<div id="div4">4</div> -->
+</body>
+</html>
