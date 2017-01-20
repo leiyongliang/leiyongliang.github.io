@@ -1,0 +1,77 @@
+body,h1,ul,h2,h3,p{
+	margin: 0;
+	padding: 0;
+}
+ul{
+	list-style: outside none none;
+}
+a{
+	text-decoration: none;
+}
+
+#nav{
+	width: 100%;
+	height: 70px;
+	background-color: #333;
+	min-width: 1263px;
+	box-shadow: 4px 4px 10px rgba(0,0,0,0.7);
+	position: relative;
+	z-index: 999;
+
+}
+#nav > section{
+	width: 1263px;
+	height: 70px;
+	margin: 0 auto;
+}
+#nav > section > h1{
+	width: 270px;
+	height: 70px;
+	background-image: url(#);
+	float: left;
+	line-height: 70px;
+	text-align: center;
+	font-size: 45px;
+	color: Chocolate;
+	transition:color 4s;
+}
+#nav > section > h1:hover{
+	color:DeepSkyBlue;
+
+}
+
+
+#nav > section >ul{
+	float: right;
+	height: 70px;
+	line-height: 70px;
+	width: 650px;
+	color: #eee;
+
+}
+#nav > section >ul >li{
+	float: left;
+	width: 120px;
+	text-align: center;
+}
+#nav > section >ul >li >a{
+	color: #eee;
+	display: block;
+}
+#nav > section >ul >li >a:hover{
+	background-color: #000;
+}
+
+#nav .active{
+	background-color: #000;
+}
+
+#footer .bottom{
+	height: 80px;
+	line-height: 80px;
+	color: #777;
+	border-top: 1px solid #444;
+	text-align: center;
+	background-color: #222;
+
+}

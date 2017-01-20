@@ -1,0 +1,73 @@
+html,body ,.commentbox{
+  font-family: sans-serif;
+  background-color: #315481;
+  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+  background-attachment: fixed;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+.commentlist{
+  height: 90%;
+  overflow:auto;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+.comment{
+  width: 200px;
+  height: 300px;
+  background: linear-gradient(to left ,skyblue,rgba(0,10,97,0.3));
+  float: left;
+  text-align: center;
+  margin: 40px;
+  border-radius: 10px;
+  transform: rotate(20deg);
+  font-size: 20px;
+  color:#444;
+}
+.commentauthor{
+  font-size: 22px;
+  color:#222;
+}
+.commentform{
+  margin: 0 auto;
+  width: 80%;
+  height: 40px;
+}
+.comauthor{
+  width: 10%;
+  height: 100%;
+  margin-right: 10px;
+  font-size: 18px;
+  background: linear-gradient(to left,orange,#eee);
+  border: 0;
+  border-radius: 4px;
+  text-indent: 4px;
+}
+.comtext{
+  width: 78%;
+  height: 100%;
+  margin-right: 10px;
+  font-size: 18px;
+  background: linear-gradient(to left,orange,#eee);
+  border: 0;
+  border-radius: 8px;
+  text-indent: 8px;
+}
+.comsubmit{
+  width: 10%;
+  height: 100%;
+  font-size: 18px;
+  background: linear-gradient(to left,rgba(255,0,0,0.7),rgba(255,255,255,0.4));
+  border: 0;
+  border-radius: 4px;
+  text-indent: 4px;
+  cursor: pointer;
+  color: #fff;
+}

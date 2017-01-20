@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+<title>媒体报道</title>
+<meta name="keywords" content="pc界面"/>
+<meta name="author" content="gaofei"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<meta content="telephone=no" name="format-detection" />
+<meta content="email=no" name="format-detection" />
+<meta name="screen-orientation" content="portrait"/> 
+<link rel="shortcut icon" href="img/ico.ico" type="image/x-icon"/>
+<!-- 外部CSS -->
+<link rel="stylesheet" href="css/piggy_bank.css"/> 
+<!-- 外部jquery -->     
+<script src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+  $(document).ready(function(){
+    $(".meiti_f_t").each(function(){
+      var maxwidth = 80;
+      if($(this).text().length>maxwidth){
+             $(this).text($(this).text().substring(0,maxwidth));
+             $(this).html($(this).html()+'......');
+      }
+    });
+  });
+/*菜单事件*/
+      $("#about_we").hover(function(){
+          $("#about_we_f").slideDown(100);
+        },function(){
+           $("#about_we_f").slideUp(100);
+        }); 
+}); 
+</script>
+
+</head>
+   <body>  
+     <div class="p_b_f" style="height:70px;">
+       <div class="p_b_f_f" style="background-color:#ffffff;">
+         <div class="p_b_f_f_f">
+           <div class="p_b_f_f_f_f" onclick="location.href='index.html'">
+             <img src="img/logo.png">
+           </div>
+           <div class="p_b_f_f_f_s" style="position: relative;height:40px;color:#fe541f;" id="about_we">
+              关于我们
+               <div class="p_b_f_f_f_s_f">
+               <img src="img/more.png"/>
+             </div>
+             <!--about we 链接-->
+             <div class="p_b_f_f_f_s_s" id="about_we_f">
+               <ul>
+                 <li onclick="location.href='about_we.html'">公司简介</li>
+                 <li onclick="location.href='jiaru.html'">加入我们</li>
+                 <li style="border:0px;" onclick="location.href='media_reports.html'">媒体报道</li>
+               </ul>
+             </div>
+           </div>
+           <div class="p_b_f_f_f_s" onclick="location.href='piggy_bank_financing.html'">零钱罐理财</div>
+           <div class="p_b_f_f_f_s" onclick="location.href='index.html'">首页</div>
+         </div>
+       </div>
+     </div>
+     <!--媒体报道-->
+     <div class="mei"><span style="font-weight: 100;">——</span> 媒体报道 <span style="font-weight: 100;">——</span>
+        <div class="mei_f">Medic coverage</div>
+     </div>
+     <div class="meiti">
+       <div class="meiti_f" onclick="location.href='meiti/media_reports07.html'">
+         <img src="img/meiti/07.png">
+         <div class="meiti_f_f">
+           女白领爱享受生活，月余1/3如何理财
+         </div>
+         <div class="meiti_f_s">
+           百度百家：2016-04-20
+         </div>
+         <div class="meiti_f_t">
+           爱购物爱聚会爱旅游的李小姐今年26岁，深圳本地人，大学毕业三年，从事旅游业，每月到手薪资为7500元，现存款有6万。目前和父母居住，单身。
+
+         </div>
+       </div>
+       <div class="meiti_f" style="margin-left:30px;margin-right: 30px;" onclick="location.href='meiti/media_reports08.html'">
+         <img src="img/meiti/08.png">
+         <div class="meiti_f_f">
+           如何选择稳健的理财产品?让零钱罐帮助你！
+         </div>
+         <div class="meiti_f_s">
+           中国经济新闻网：2016-04-20
+         </div>
+         <div class="meiti_f_t">
+           把钱存在银行里赚利息的时代早已过去，随着银行利率持续走低和各类投资渠道的普及，人们的理财意识也逐步提高。投资理财产品成为了许多人的不二选择。但是，在众多良莠不齐的投资理财产品中，如何选择靠谱合适的理财产品呢？
+
+         </div>
+       </div>
+       <div class="meiti_f" onclick="location.href='meiti/media_reports09.html'">
+         <img src="img/meiti/09.png">
+         <div class="meiti_f_f">
+           小零钱 大改变——零钱罐
+         </div>
+         <div class="meiti_f_s">
+           东北新闻网：2016-04-20
+         </div>
+         <div class="meiti_f_t">
+           谈到小钱理财，可能部分人有自己的理财方法，但是不一定对多数人有效，而对于那部分，可能你是月光族，也可能是卡奴，但也许你比自己认为的要富有。对于上班族而言，除了现有工资卡和存款，你是否还有多少钱是被遗忘在角落睡大觉的？也许它们早就被用做管理费扣光了。上家公司的工资卡里还有八十块钱，ATM 取不出来了，还要专门跑趟银行好麻烦；听说医保存折不能取钱了，可我的存折早就找不到了，等等。
+         </div>
+       </div>
+
+       <div class="meiti_f" onclick="location.href='meiti/media_reports10.html'">
+         <img src="img/meiti/10.png">
+         <div class="meiti_f_f">
+           比余额宝、招财宝更安全的理财产品，还有哪些?
+         </div>
+         <div class="meiti_f_s">
+           今日头条： 2016-04-20
+         </div>
+         <div class="meiti_f_t">
+           余额宝，作为国民理财启蒙导师，对我们的生活有着很大影响。然而收益一跌再跌，年化收益率已经跌至2.5%了。而其规模也出现了负增长，现在一天比一天缩水，大量资金流出。而同属阿里巴巴的招财宝，随着央行降息，理财产品年利率也只有4.6%。收益实在太低，对他们充满着感谢之情，但也不得不说再见了。
+
+         </div>
+       </div>
+       <div class="meiti_f" style="margin-left:30px;margin-right: 30px;" onclick="location.href='meiti/media_reports11.html'">
+         <img src="img/meiti/11.png">
+         <div class="meiti_f_f">
+           测一测属于你的理财产品？
+         </div>
+         <div class="meiti_f_s">
+           一点资讯：2016-04-20
+         </div>
+         <div class="meiti_f_t">
+           童鞋们！不管你们有没有理财投资过，我想大家都应该先了解自己的理财观念。毕竟思想是行动的指南，提前了解自身的理财观，更有助于规划理财方案。
+
+         </div>
+       </div>
+       <div class="meiti_s">
+         <div class="meiti_s_f bcolor" onclick="location.href='media_reports.html'">第一页</div>
+         <div class="meiti_s_f">第二页</div>
+       </div>
+       
+      <!--媒体报道end-->
+       <!--bottom-->  
+    <div class="gaofei_bt">
+    	<div class="gaofei_bt_f">
+    	  客服热线：<span>400-668-5753</span>&nbsp;(周一至周五：9:00-17:30)&nbsp;&copy;<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">粤ICP备14026928号-3</a>
+    	</div>
+    	<div class="gaofei_bt_s">
+    		<a href="about_we.html" target="_blank">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="jiaru.html" target="_blank">加入我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="media_reports.html" target="_blank">媒体报道</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="http://weibo.com/lqgjinrong" target="_blank">官方微博</a>
+    	</div>
+    </div>
+    <!--bottom end-->
+    <!--侧边-->
+   <div class="right_f">
+     <div class="right_f_f">
+        <div class="right_f_f_f">
+          <img src="img/telephone6.png">
+        </div>
+     </div>
+     <div class="right_f_s">
+        <div class="right_f_s_f">
+         <img src="img/app2.png">
+        </div>
+     </div>
+   </div>
+   <script>
+     $(function(){
+      $(".right_f_f").hover(function(){
+        //alert();
+        $(".right_f_f_f").animate({right:'0px'},600);
+      },function(){
+         $(".right_f_f_f").animate({right:'-300px'},600);
+      });
+      $(".right_f_s").hover(function(){
+        //alert();
+        $(".right_f_s_f").animate({right:'50px'},600);
+      },function(){
+         $(".right_f_s_f").animate({right:'-250px'},10);
+      });
+     });
+   </script>
+    <!--侧边end-->
+</body>
+</html>

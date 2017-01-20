@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>坦克大战</title>
+ </head>
+ <body onkeydown="getCommand()">
+ <h1>坦克大战</h1>
+ <canvas id="tk" width="400px" height="300px"
+ style="background-color:black"></canvas>
+ <script type="text/javascript" src="tank.js"></script>
+ <script type="text/javascript">
+ 
+ //得到画布
+  var canvas1=document.getElementById("tk")
+  var cxt=canvas1.getContext("2d")
+
+  //我方坦克
+  var hero= new Hero(100,200,0,herocolor)
+  //定义子弹
+  var heroBullet=null;
+ 
+
+  //敌方坦克
+  var enemys=new Array();
+
+  for(var i=0;i<6;i++){
+	  var enemy=new Enemy((i+1)*50,0,2,enemycolor);
+	  enemys[i]=enemy;
+	 
+  }
+
+
+  function flashTankMap(){
+	  cxt.clearRect(0,0,400,300)
+	  
+	  for(var i=0;i<6;i++){
+		   drawtk(enemys[i])
+	  }
+	  drawtk(hero)
+	  drawbullet()
+	  
+	  
+
+
+
+
+  }
+  
+
+  
+  flashTankMap()
+  
+  function getCommand(){
+	  var code=event.keyCode
+
+	  switch(code){
+		  case 87:
+		  hero.moveup()
+		  break;
+		  case 68:
+		  hero.moveright()
+		  break
+		  case 65:
+		  hero.moveleft()
+		  break
+		  case 83:
+		  hero.movedown()
+		  break
+		  case 74:
+		  hero.shotEnemy()
+		  break
+	  }
+	  
+	  flashTankMap()
+		  
+
+  }
+
+
+ 
+window.setInterval("flashTankMap()",100)
+ </script>
+ <h2>Yoler作品</h2>
+ <h3>---制作于2016年1月21日晚</h3>
+ <h3>注：w a s d用于控制方向，j发射子弹！</h3>
+ </body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+<title>零钱罐</title>
+<meta name="keywords" content="pc界面"/>
+<meta name="author" content="gaofei"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="keywords" content="零钱罐，理财" />
+<meta name="description" content="零钱罐APP是一款专业可靠的应用，让零钱变财富，让生活简单轻松，将活期与定期理财相结合的金融理财神器，资产随存随取、高收益每天到账、方便快捷流畅零钱罐致力于成为值得信赖的专业的微理财服务产品"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<!-- <meta content="telephone=no" name="format-detection" />
+<meta content="email=no" name="format-detection" />
+<meta name="screen-orientation" content="portrait"> -->
+<!-- 外部CSS -->
+<link rel="shortcut icon" href="img/ico.ico" type="image/x-icon"/>
+<link rel="stylesheet" href="css/piggy_bank.css"/> 
+<!-- 外部jquery -->     
+<script src="js/jquery-1.8.2.min.js"></script>
+<script src="js/scrool.js"></script>
+<script src="js/each.js"></script>
+ <script>
+    $(document).ready(function(){
+      //var a = $(window).height();
+      var a = window.screen.height;
+
+      //alert(a);
+      var b = 0.3*a;
+      var c = 0.25*a; 
+      var d = 0.05*a;
+      var r = 0.04*a;
+      //var w = 0.24*a;
+      //alert(d);
+      $(".pg_five_f").height(c);
+      $(".pg_five_t").height(b);
+      $(".pg_five_f_f").css({'top':d});
+      $(".pg_five_t_f").height(c);
+      $(".pg_five_t_f").children("img").height(c);
+      $(".pg_five_t_f").children("img").width(c);
+      $(".pg_five_t_s").height(c);
+      $(".pg_five_t_s").children("img").height(c);
+      $(".pg_five_t_s").children("img").width(c);
+      $("#biantaitu").width(r);
+    });
+   </script>
+<script>
+$(function() {
+  $('.panel').css({'height': $(window).height()});
+  $.scrollify({
+    section: '.panel'
+  });
+});
+</script>
+<script type="text/javascript">
+     $(function(){
+      $(document).ready(function(){
+        var a = $(window).height();
+        $(".pg_ban").height(a);
+        $(".pg_tow").height(a);
+        $(".pg_three").height(a);
+        $(".pg_four").height(a);
+        $(".pg_five").height(a);
+      });
+
+      /*滚动事件*/
+      $(window).scroll(function(){
+        var b = $(window).height();
+        var c = 2*b;
+        var ff = 3*b;
+        //alert(b);
+        //alert(c);
+        var heightt = $(document).scrollTop();
+      if(heightt == b){
+        $("#rightchulai").css({'display':'block'});
+         $("#rightchulai").animate({left:'0px'},600);
+        }else if(heightt == c){
+          $("#iphone3").css({'display':'block'});
+           $("#iphone3").animate({right:'0px'},600);
+        }else if(heightt == ff){
+            $("#iphone4").css({'display':'block'});
+           $("#iphone4").animate({left:'0px'},600);
+        }else{
+          $("#rightchulai").css({'display':'none',
+            'left':'1100px'});
+          $("#iphone3").css({'display':'none',
+            'right':'1100px'});
+          $("#iphone4").css({'display':'none',
+            'left':'1100px'});
+        }
+      });
+/*菜单事件*/
+      $("#about_we").hover(function(){
+          $("#about_we_f").slideDown(100);
+        },function(){
+           $("#about_we_f").slideUp(100);
+        });
+});   
+</script>
+
+</head>
+   <body>  
+   <!--first one-->
+   <div class="pg_ban panel">
+   <!--title-->
+     <div class="pg_ban_f">
+       <div class="pg_ban_f_f">
+       <!--logo-->
+         <div class="pg_ban_f_f_f" onclick="location.href='index.html'">
+           <img src="img/logo.png">
+         </div>
+         <div class="pg_ban_f_f_s" style="position: relative;height:40px;" id="about_we">
+            关于我们
+             <div class="pg_ban_f_f_s_f">
+               <img src="img/more.png"/>
+             </div>
+             <!--about we 链接-->
+             <div class="pg_ban_f_f_s_s" id="about_we_f">
+               <ul>
+                 <li onclick="location.href='about_we.html'">公司简介</li>
+                 <li onclick="location.href='jiaru.html'">加入我们</li>
+                 <li style="border:0px;" onclick="location.href='media_reports.html'">媒体报道</li>
+               </ul>
+             </div>
+        </div>
+         <div class="pg_ban_f_f_s" onclick="location.href='piggy_bank_financing.html'">零钱罐理财</div>
+         <div class="pg_ban_f_f_s col1" onclick="location.href='index.html'">首页</div>
+       </div>
+     </div>
+   <!--title end-->
+   <div style="height:100px;"></div>
+   <!--shan tu -->
+        <!-- <div style="height:250px;"></div>-->
+         <div class="pa_ban_s">
+           <div class="pa_ban_s_f">
+             <img src="img/1.png" class="img1">
+             <img src="img/2.png" class="img2">
+             <img src="img/3.png" class="img3">
+             <img src="img/4.png" class="img4">
+           </div>
+           <div class="pa_ban_s_s">
+             <img src="img/5.png" class="img5">
+             <img src="img/6.png" class="img6">
+             <img src="img/7.png" class="img7">
+             <img src="img/8.png" class="img8">
+           </div>
+         </div>
+         <!--shan tu end-->
+
+   <!--bottom-->
+   <div class="pa_ban_bottom">
+     <div class="pa_ban_bottom_f">
+       <img src="img/title.png">
+     </div>
+   </div>
+   <!--bottom end-->
+   </div>
+   <!--first end-->
+   <!--tow -->
+   <div class="pg_tow panel">
+      <div class="pg_tow_f">
+        <div class="pg_tow_f_f">
+          <div class="pg_tow_f_f_f">
+            <div class="pg_tow_f_f_f_f" id="rightchulai">
+              <img src="img/iphone2.png">
+            </div>
+            <div class="pg_tow_f_f_f_s">
+              <img src="img/ling.png">
+            </div>
+            <div class="pg_tow_f_f_f_t">
+             她说：“是爱”<br/>爱，是一种伟大的力量<br/>伴侣之间的爱，是细水流长<br/>家人之间的爱，是上帝的礼物<br/>朋友之间的爱，是那些年我们追过的女孩
+             <p>一切爱，<span>零</span>距离<br/>相伴相随，不离不弃
+</p>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+   <!--tow end-->
+   <!--three-->
+   <div class="pg_three panel">
+     <div class="pg_three_f">
+       <div class="pg_three_f_f">
+         <div class="pg_three_f_f_f">
+           他说：“是金钱”<br/>金钱，是一次无穷无尽的诱惑。<br/>男人之间，他们比拼财富<br/>女人之间，她们剁手自我增值<br/>
+          <p><span>钱</span>，是什么味道？<br/>是辣条、玩具、到处浪、知识、好奇心...</p>
+         </div>
+         <div class="pg_three_f_f_s">
+           <img src="img/money.png">
+         </div>
+         <div class="pg_three_f_f_t" id="iphone3">
+           <img src="img/iphone3.png">
+         </div>
+       </div>
+     </div>
+   </div>
+   <!--three end-->
+   <!--fours-->
+   <div class="pg_four panel">
+    <div class="pg_four_f">
+      <div class="pg_four_f_f">
+        <div class="pg_four_f_f_f" id="iphone4">
+          <img src="img/iphone4.png">
+        </div>
+        <div class="pg_four_f_f_s">
+          <img src="img/guan.png">
+        </div>
+        <div class="pg_four_f_f_t">
+          他们说：“是成功”<br/>
+成功，是一个辛酸与激情的过程<br/>
+与失败相比，成功只是一个反义词<br/>
+与过去相比，成功是人生道路的再启程<br/>
+<p>
+成功=人生冠军？<br/>
+成功与否，你都是我们的<span>罐</span>军！<br/>
+选择这里，你就是冠军<br/>
+</p>
+        </div>
+      </div>
+    </div>
+   </div>
+   <!--fours end-->
+   <!--five -->
+   <div class="pg_five panel">
+   <div style="height:70px;"></div>
+      <div class="pg_five_f">
+        <div class="pg_five_f_f">
+          <div class="pg_five_f_f_f">
+            其实，打动你的<br/>是它<br/>
+            <img src="img/down.png" id="biantaitu">
+          </div>
+        </div>
+      </div>  
+      <div class="pg_five_s">零钱罐</div>
+      <div class="pg_five_t">
+        <div class="pg_five_t_f">
+          <img src="img/app.png">
+          <p style="margin: 0;padding: 0;">扫描二维码即可下载APP</p>
+        </div>
+        <div class="pg_five_t_s">
+          <img src="img/weixin.png">
+          <p style="margin: 0;padding: 0;">扫描二维码即可关注微信</p>
+        </div>
+      </div>
+       <div class="footer">
+         <div class="footer_f">
+          客服热线：<span>400-668-5753</span>&nbsp;(周一至周五：9:00-17:30)&nbsp;&copy;<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">粤ICP备14026928号-3</a>
+         </div>
+         <div class="footer_s">
+            <a href="about_we.html" target="_blank">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="jiaru.html" target="_blank">加入我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="media_reports.html" target="_blank">媒体报道</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="http://weibo.com/lqgjinrong" target="_blank">官方微博</a>
+          </div>
+        </div>
+    </div>
+   <!--five end-->
+   <!--侧边-->
+   <div class="right_f">
+     <div class="right_f_f">
+        <div class="right_f_f_f">
+          <img src="img/telephone6.png">
+        </div>
+     </div>
+     <div class="right_f_s">
+        <div class="right_f_s_f">
+         <img src="img/app2.png">
+        </div>
+     </div>
+   </div>
+   <script>
+     $(function(){
+      $(".right_f_f").hover(function(){
+        //alert();
+        $(".right_f_f_f").animate({right:'0px'},600);
+      },function(){
+         $(".right_f_f_f").animate({right:'-300px'},600);
+      });
+      $(".right_f_s").hover(function(){
+        //alert();
+        $(".right_f_s_f").animate({right:'50px'},600);
+      },function(){
+         $(".right_f_s_f").animate({right:'-250px'},10);
+      });
+     });
+   </script>
+    <!--侧边end-->
+   </body>
+</html>

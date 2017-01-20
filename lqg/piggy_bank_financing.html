@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+<title>零钱罐理财</title>
+<meta name="keywords" content="pc界面"/>
+<meta name="author" content="gaofei"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<meta content="telephone=no" name="format-detection" />
+<meta content="email=no" name="format-detection" />
+<meta name="screen-orientation" content="portrait"/> 
+<link rel="shortcut icon" href="img/ico.ico" type="image/x-icon"/>
+<!-- 外部CSS -->
+<link rel="stylesheet" href="css/piggy_bank.css"/> 
+<!-- 外部jquery -->     
+<script src="js/jquery-1.8.2.min.js"></script>
+<script src="js/scrool.js"></script>
+<script src="js/each.js"></script>
+<script>
+$(function() {
+  $('.panel').css({'height': $(window).height()});
+  $.scrollify({
+    section: '.panel'
+  });
+});
+</script>
+<script type="text/javascript">
+     $(function(){
+      $(document).ready(function(){
+        var a = $(window).height();
+        $(".p_b_f").height(a);
+        $(".p_b_s").height(a);
+        $(".p_b_t").height(a);
+        $(".p_b_four").height(a);
+      });
+
+      /*滚动事件*/
+      $(document).ready(function(){
+         $("#fist_one").animate({bottom:'0px'},600);
+      });
+      $(window).scroll(function(){
+        var b = $(window).height();
+        var c = 2*b;
+        var ff = 3*b;
+        //alert(b);
+        //alert(c);
+       
+        var heightt = $(document).scrollTop();
+      if(heightt == 0){
+        //alert();
+        $("#fist_one").css({'display':'block'});
+         $("#fist_one").animate({bottom:'0px'},600);
+        }else if(heightt == b){
+          $("#two_one").css({'display':'block'});
+           $("#two_one").animate({left:'0px'},600);
+           $("#two_tw").css({'display':'block'});
+           $("#two_tw").animate({right:'0px'},600);
+        }else if(heightt == c){
+            $("#three_one").css({'display':'block'});
+           $("#three_one").animate({left:'0px'},600);
+           $("#three_tw").css({'display':'block'});
+           $("#three_tw").animate({right:'0px'},600);
+        }else if(heightt == ff){
+            $("#four_one").css({'display':'block'});
+            $("#four_one").animate({left:'0px'},600);
+            $("#four_tw").css({'display':'block'});
+           $("#four_tw").animate({right:'0px'},600);
+        }else{
+          $("#fist_one").css({'display':'none',
+            'bottom':'-1000px'});
+         $("#two_one").css({'display':'none',
+            'left':'-1000px'});
+          $("#two_tw").css({'display':'none',
+            'right':'-1000px'});
+           $("#three_one").css({'display':'none',
+            'left':'-1000px'});
+           $("#three_tw").css({'display':'none',
+            'right':'-1000px'});
+            $("#four_one").css({'display':'none',
+            'left':'-1000px'});
+          $("#four_tw").css({'display':'none',
+            'right':'-1000px'});
+        }
+      });
+/*菜单事件*/
+      $("#about_we").hover(function(){
+          $("#about_we_f").slideDown(100);
+        },function(){
+           $("#about_we_f").slideUp(100);
+        });
+});   
+</script>
+
+</head>
+   <body>  
+     <div class="p_b_f panel">
+       <div class="p_b_f_f">
+         <div class="p_b_f_f_f">
+           <div class="p_b_f_f_f_f" onclick="location.href='index.html'">
+             <img src="img/logo.png">
+           </div>
+           <div class="p_b_f_f_f_s" style="position: relative;height:40px;" id="about_we">
+              关于我们
+               <div class="p_b_f_f_f_s_f">
+               <img src="img/more.png"/>
+             </div>
+             <!--about we 链接-->
+             <div class="p_b_f_f_f_s_s" id="about_we_f">
+               <ul>
+                 <li onclick="location.href='about_we.html'">公司简介</li>
+                 <li onclick="location.href='jiaru.html'">加入我们</li>
+                 <li style="border:0px;" onclick="location.href='media_reports.html'">媒体报道</li>
+               </ul>
+             </div>
+           </div>
+           <div class="p_b_f_f_f_s col1" onclick="location.href='piggy_bank_financing.html'">零钱罐理财</div>
+           <div class="p_b_f_f_f_s" onclick="location.href='index.html'">首页</div>
+         </div>
+       </div>
+       <div class="p_b_f_s" id="fist_one">
+             <p><span style="font-size:40px; color:#000;">小零钱，大改变</span>
+              <br/> Small change big difference
+            </p>
+           <img src="img/linqian/lingqian.png">
+       </div>
+     </div>
+     <!--tow-->
+     <div class="p_b_s panel">
+       <div style="height:70px;"></div>
+       <div class="p_b_s_f">我们的业务</div>
+       <!-- <div class="p_b_s_s">
+         <p>零钱宝</p>
+         <span>活期理财，随时随地，周涨<b style="color:#ff6434;">0.5%</b>，<br/>
+         最高收益达<b style="color:#ff6434;">10.88%</b>，没人限20万。</span>
+       </div> -->
+       <div class="p_b_s_t">
+         <div class="p_b_s_t_f">
+           <div class="p_b_s_t_f_f" id="two_one">
+           <p>零钱宝</p>
+         <span>活期理财，随时随地，周涨<b style="color:#ff6434;">0.5%</b>，<br/>
+         最高收益达<b style="color:#ff6434;">10.88%</b>，每人限20万。</span><br/><br/><br/><br/>
+             <img src="img/linqian/duibi.png">
+           </div>
+           <div class="p_b_s_t_s" id="two_tw">
+             <img src="img/linqian/baotu.png">
+           </div>
+         </div>
+       </div>
+     </div>
+     <!--tow end-->
+     <!--three-->
+     <div class="p_b_t panel">
+       <div style="height:220px;width: 100%;"></div>
+       <!-- <div class="p_b_t_f">
+         <p>定期项目</p>
+         <span>月标项目年化收益<b style="color:#ff6434;">12.88%</b>，<br/><b style="color:#ff6434;">先息后本</b>，利息每天到账</span>
+       </div> -->
+       <div class="p_b_t_s">
+         <div class="p_b_t_s_f">
+           <div class="p_b_t_s_f_f" id="three_one">
+             <img src="img/linqian/dingqi.png">
+           </div>
+           <div class="p_b_t_s_f_s" id="three_tw">
+           <p>定期项目</p>
+         <span>月标项目年化收益<b style="color:#ff6434;">12.88%</b>，<br/><b style="color:#ff6434;">先息后本</b>，利息每天到账。</span><br/><br/><br/><br/><br/><br/><br/>
+             <img src="img/linqian/dinbi.png">
+           </div>
+         </div>
+       </div>
+     </div>
+     <!--three end-->
+      <!--four-->
+     <div class="p_b_s panel">
+       <div style="height:70px;"></div>
+       <div class="p_b_s_f">安全保障</div>
+       <!-- <div class="p_b_s_s">
+         <p>零钱宝</p>
+         <span>活期理财，随时随地，周涨<b style="color:#ff6434;">0.5%</b>，<br/>
+         最高收益达<b style="color:#ff6434;">10.88%</b>，没人限20万。</span>
+       </div> -->
+       <div class="p_b_s_t">
+         <div class="p_b_s_t_f">
+           <div class="p_b_s_t_f_f" id="four_one">
+           <p>安全保障</p>
+         <span><img src="img/linqian/li.png" style="width:4px;height:4px;margin-top:-20px;"> 中房前海基金战略入股<br/><img src="img/linqian/li.png" style="width:4px;height:4px;margin-top:-20px;"> 注册资金<b style="color:#ff6434;">一亿元</b>本息保障<br/><img src="img/linqian/li.png" style="width:4px;height:4px;margin-top:-20px;"> 前海股权交易中心挂牌企业<br/><img src="img/linqian/li.png" style="width:4px;height:4px;margin-top:-20px;"> 由瀛和律师法大大提供法律支持</span>
+         <br/><br/>
+             <img src="img/linqian/baozhang.png" style="margin-top: 50px">
+           </div>
+           <div class="p_b_s_t_s" id="four_tw">
+             <img src="img/linqian/baozhangr.png">
+           </div>
+         </div>
+       </div>
+     </div>
+     <!--four end-->
+     <!--five-->
+     <div class="p_b_four panel">
+       <div style="height:50px;"></div>
+       <div class="p_b_four_f">最新鲜体验"零妹妹"客服</div>
+       <div class="p_b_four_f"><p>卡通形象与理财完美结合</p><p>甜心爆满让你赚钱不寂寞</p><p>如同专业而贴心理财管家</p></div>
+       <div class="p_b_four_s">
+         <img src="img/linqian/linmei.png">
+       </div>
+       <div class="p_b_four_t">
+         <div class="p_b_four_t_f">
+           <div class="p_b_four_t_f_f">客服热线：<span>400-668-5753</span>&nbsp;(周一至周五：9:00-17:30)&nbsp;&copy;<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">粤ICP备14026928号-3</a></div>
+           <div class="p_b_four_t_f_s"><a href="about_we.html" target="_blank">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="jiaru.html" target="_blank">加入我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="media_reports.html" target="_blank">媒体报道</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://weibo.com/lqgjinrong" target="_blank">官方微博</a></div>
+         </div>
+       </div>
+     </div>
+     <!--five end-->
+<!--侧边-->
+   <div class="right_f">
+     <div class="right_f_f">
+        <div class="right_f_f_f">
+          <img src="img/telephone6.png">
+        </div>
+     </div>
+     <div class="right_f_s">
+        <div class="right_f_s_f">
+         <img src="img/app2.png">
+        </div>
+     </div>
+   </div>
+   <script>
+     $(function(){
+      $(".right_f_f").hover(function(){
+        //alert();
+        $(".right_f_f_f").animate({right:'0px'},600);
+      },function(){
+         $(".right_f_f_f").animate({right:'-300px'},600);
+      });
+      $(".right_f_s").hover(function(){
+        //alert();
+        $(".right_f_s_f").animate({right:'50px'},600);
+      },function(){
+         $(".right_f_s_f").animate({right:'-250px'},10);
+      });
+     });
+   </script>
+    <!--侧边end-->
+   </body>
+</html>

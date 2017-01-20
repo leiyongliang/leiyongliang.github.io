@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+<title>媒体报道</title>
+<meta name="keywords" content="pc界面"/>
+<meta name="author" content="gaofei"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<meta content="telephone=no" name="format-detection" />
+<meta content="email=no" name="format-detection" />
+<meta name="screen-orientation" content="portrait"/> 
+<link rel="shortcut icon" href="img/ico.ico" type="image/x-icon"/>
+<!-- 外部CSS -->
+<link rel="stylesheet" href="css/piggy_bank.css"/> 
+<!-- 外部jquery -->     
+<script src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+  $(document).ready(function(){
+    $(".meiti_f_t").each(function(){
+      var maxwidth = 80;
+      if($(this).text().length>maxwidth){
+             $(this).text($(this).text().substring(0,maxwidth));
+             $(this).html($(this).html()+'......');
+      }
+    });
+  });
+/*菜单事件*/
+      $("#about_we").hover(function(){
+          $("#about_we_f").slideDown(100);
+        },function(){
+           $("#about_we_f").slideUp(100);
+        }); 
+}); 
+</script>
+
+</head>
+   <body>  
+     <div class="p_b_f" style="height:70px;">
+       <div class="p_b_f_f" style="background-color:#ffffff;">
+         <div class="p_b_f_f_f">
+           <div class="p_b_f_f_f_f" onclick="location.href='index.html'">
+             <img src="img/logo.png">
+           </div>
+           <div class="p_b_f_f_f_s" style="position: relative;height:40px;color:#fe541f;" id="about_we">
+              关于我们
+               <div class="p_b_f_f_f_s_f">
+               <img src="img/more.png"/>
+             </div>
+             <!--about we 链接-->
+             <div class="p_b_f_f_f_s_s" id="about_we_f">
+               <ul>
+                 <li onclick="location.href='about_we.html'">公司简介</li>
+                 <li onclick="location.href='jiaru.html'">加入我们</li>
+                 <li style="border:0px;" onclick="location.href='media_reports.html'">媒体报道</li>
+               </ul>
+             </div>
+           </div>
+           <div class="p_b_f_f_f_s" onclick="location.href='piggy_bank_financing.html'">零钱罐理财</div>
+           <div class="p_b_f_f_f_s" onclick="location.href='index.html'">首页</div>
+         </div>
+       </div>
+     </div>
+     <!--媒体报道-->
+     <div class="mei"><span style="font-weight: 100;">——</span> 媒体报道 <span style="font-weight: 100;">——</span>
+        <div class="mei_f">Medic coverage</div>
+     </div>
+     <div class="meiti">
+       <div class="meiti_f" onclick="location.href='meiti/media_reports01.html'">
+         <img src="img/meiti/01.png">
+         <div class="meiti_f_f">
+           理财通大耍朋友圈后，还会有多少理财app崛起？
+         </div>
+         <div class="meiti_f_s">
+           深圳经济网：2016-03-18
+         </div>
+         <div class="meiti_f_t">
+           想必，2016年新春期间，微信朋友圈内推出的“红包毛玻璃照”活动，依然让人记忆犹新。殊不知，在全民娱乐的同时，腾讯理财通却成为了这次营销的最大赢家。
+早在1月20日，腾讯理财通就已正式登陆微信“红包”界面，用户拆开微信红包时，可以用红包金额申购理财通货币基金，这也是理财通进入微信后的一次推广活动。
+
+         </div>
+         <!-- <div class="meiti_f_four">
+           <div class="meiti_f_five">查看更多</div>
+         </div> -->
+       </div>
+       <div class="meiti_f" style="margin-left:30px;margin-right: 30px;"onclick="location.href='meiti/media_reports02.html'">
+         <img src="img/meiti/02.png">
+         <div class="meiti_f_f">
+           如何打造一款具有超越性的理财App竞品？
+         </div>
+         <div class="meiti_f_s">
+           中财网：2016-03-18
+         </div>
+         <div class="meiti_f_t">
+           在今天这个互联网化的时代，每一个人都会非常注重自己的“资产保值”。但实际上，“理财小白”一抓一大把。业界流行一句话：“你不理财，财不理你。”如何轻松又稳健的理财？当然是需要一款懂你的超级理财神器App啦！
+         </div>
+       </div>
+       <div class="meiti_f" onclick="location.href='meiti/media_reports03.html'">
+         <img src="img/meiti/03.png">
+         <div class="meiti_f_f">
+           如果你是理财小白，跟她走
+         </div>
+         <div class="meiti_f_s">
+           中财网：2016-03-18
+         </div>
+         <div class="meiti_f_t">
+           俗话说：你不理财，财不理你。无论你是否精通西方经济学、宏观经济学、微观经济学、运筹学、经济法、财务报表分析……你始终都会感觉：手！里！缺！钱！而这种情形下，如何做好闲置散钱的理财工作显得尤为重要。虽然每个人都有一颗热衷理财的心，但是身边依然有很多朋友制定不出完整详尽的理财规划，甚至连正确的理财观念和清晰的理财思路都没有。
+         </div>
+       </div>
+
+       <div class="meiti_f" onclick="location.href='meiti/media_reports04.html'">
+         <img src="img/meiti/04.png">
+         <div class="meiti_f_f">
+           大学生“理财饥渴症”怎么治？
+         </div>
+         <div class="meiti_f_s">
+           金投财经：2016-4-20
+         </div>
+         <div class="meiti_f_t">
+           说到这个话题。事实上，大学生理财市场此前并非没有试水者，但却没有切到这块大蛋糕。早在10年前，国内多家银行都曾对校园理财市场进行过跑马圈地，推出各种类型的银行卡和储蓄计划，但最终却无果而终。
+
+         </div>
+       </div>
+       <div class="meiti_f" style="margin-left:30px;margin-right: 30px;" onclick="location.href='meiti/media_reports05.html'">
+         <img src="img/meiti/05.png">
+         <div class="meiti_f_f">
+           小小家庭如何大大理财
+         </div>
+         <div class="meiti_f_s">
+           天下财经网：2016-04-20
+         </div>
+         <div class="meiti_f_t">
+           理财意识通过可以看书、看网站来培养，但其实家中老人通常都是我们最直接的老师，很多理财观念由来已久。比如：量入为出，开源节流。就好像零钱罐APP，将小小零钱存入理财零钱罐，会给生活带来大改变哦。
+
+         </div>
+       </div>
+       <div class="meiti_f" onclick="location.href='meiti/media_reports06.html'">
+         <img src="img/meiti/06.png">
+         <div class="meiti_f_f">
+           零钱罐：如何在理财平台上收益更大
+         </div>
+         <div class="meiti_f_s">
+           中华网投资：2016-04-20
+         </div>
+         <div class="meiti_f_t">
+           家里有了闲钱投资股票不靠谱，银行存款利率又太低，银行理财产品动不动就五万起步，利率也算不上高，那么，投资人自然看好互联网理财平台了。但投资互联网平台也不是稳坐钓鱼台，也要学习理财知识，也要把握好。不要总想一夜暴富，很多人在做投资理财时会陷入一个误区，盲目追求高收益，而忽略对风险的把控。通过互联网理财平台这条途径理财，虽然可以获取更可靠的财富增长的有效途径，但是安全稳定收益才是理财的根本。那么，如何在互联网平台理财上让资金增值，零钱罐理财专家为你来解答；
+         </div>
+       </div>
+       <div class="meiti_s">
+         <div class="meiti_s_f">第一页</div>
+         <div class="meiti_s_f bcolor" onclick="location.href='media_reportser.html'">第二页</div>
+       </div>
+       
+      <!--媒体报道end-->
+    <!--bottom-->  
+    <div class="gaofei_bt">
+    	<div class="gaofei_bt_f">
+    	  客服热线：<span>400-668-5753</span>&nbsp;(周一至周五：9:00-17:30)&nbsp;&copy;<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">粤ICP备14026928号-3</a>
+    	</div>
+    	<div class="gaofei_bt_s">
+    		<a href="about_we.html" target="_blank">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="jiaru.html" target="_blank">加入我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="media_reports.html" target="_blank">媒体报道</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="http://weibo.com/lqgjinrong" target="_blank">官方微博</a>
+    	</div>
+    </div>
+    <!--bottom end-->  
+      <!--侧边-->
+   <div class="right_f">
+     <div class="right_f_f">
+        <div class="right_f_f_f">
+          <img src="img/telephone6.png">
+        </div>
+     </div>
+     <div class="right_f_s">
+        <div class="right_f_s_f">
+         <img src="img/app2.png">
+        </div>
+     </div>
+   </div>
+   <script>
+     $(function(){
+      $(".right_f_f").hover(function(){
+        //alert();
+        $(".right_f_f_f").animate({right:'0px'},600);
+      },function(){
+         $(".right_f_f_f").animate({right:'-300px'},600);
+      });
+      $(".right_f_s").hover(function(){
+        //alert();
+        $(".right_f_s_f").animate({right:'50px'},600);
+      },function(){
+         $(".right_f_s_f").animate({right:'-250px'},10);
+      });
+     });
+   </script>
+    <!--侧边end-->
+</body>
+</html>

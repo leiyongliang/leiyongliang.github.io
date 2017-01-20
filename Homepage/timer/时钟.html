@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>canvas</title>
+	<style type="text/css">
+	#div{
+		position: absolute;
+	
+	}
+	body{
+		background-color:#393550; 
+	}
+
+
+	</style>
+</head>
+<body>
+<div id="div"><canvas id="canvas"></canvas></div>
+
+</body>
+<script type="text/javascript" src="digit.js"></script>
+<script type="text/javascript">
+var r=8;
+var margin_top=0;
+var margin_left=0;
+
+const endtime=(new Date().getTime())+5000;
+var curshowtimesendconds =0;
+var balls=[];
+const colors=["#ff00ff","#0099cc","#Aa66Cc","#9933cc","#99cc00","#669900"]
+
+window.onload=function(){
+	var canvas=document.getElementById('canvas')
+	var con=canvas.getContext("2d")
+	canvas.width=1400;
+	canvas.height=480;
+	curshowtimesendconds=getcurshowtimesendconds();
+	time=setInterval(
+		function(){
+			render(con);
+			update();
+		}
+		,50
+		)
+	/*setTimeout("t1()",6000)*/
+}
+
+//setInterval("render(con)",1000)
+/*function t1(){
+		clearInterval(time)
+		open("loge.html","_self")
+}*/
+function getcurshowtimesendconds(){
+	var curtime=new Date();
+	var ret=endtime-curtime.getTime();
+	ret = Math.round(ret/1000);
+	return ret >=0 ? ret:0;
+}
+
+function update(){
+	var nextshowtimesendconds=getcurshowtimesendconds();
+	var nhours=parseInt(nextshowtimesendconds/3600);
+	var nm=parseInt((nextshowtimesendconds-nhours*3600)/60);
+	var ns=nextshowtimesendconds%60;
+
+	var chours=parseInt(curshowtimesendconds/3600);
+	var cm=parseInt((curshowtimesendconds-chours*3600)/60);
+	var cs=curshowtimesendconds%60;
+	if (ns!=cs) {
+		if (parseInt(chours/10)!=parseInt(nhours/10)) {
+			ab(margin_left+0,margin_top,parseInt(chours/10))
+		};
+		if (parseInt(chours%10)!=parseInt(nhours%10)) {
+			ab(margin_left+16*(r+1),margin_top,parseInt(chours%10))
+		};
+		if (parseInt(cm/10)!=parseInt(nm/10)) {
+			ab(margin_left+42*(r+1),margin_top,parseInt(cm/10))
+		};
+		if (parseInt(cm%10)!=parseInt(nm%10)) {
+			ab(margin_left+58*(r+1),margin_top,parseInt(cm%10))
+		};
+
+		if (parseInt(cs/10)!=parseInt(ns/10)) {
+			ab(margin_left+84*(r+1),margin_top,parseInt(cs/10))
+		};
+		if (parseInt(cs%10)!=parseInt(ns%10)) {
+			ab(margin_left+100*(r+1),margin_top,parseInt(cs%10))
+		};
+		curshowtimesendconds=nextshowtimesendconds;
+
+	};
+	updateballs()
+}
+function updateballs(){
+	for(var i=0;i<balls.length;i++){
+		balls[i].x+=balls[i].vx;
+		balls[i].y+=balls[i].vy;
+		balls[i].vy+=balls[i].g;
+
+		if (balls[i].y>=canvas.height-8) {
+			balls[i].y=canvas.height-8;
+			balls[i].vy=-balls[i].vy*0.75;
+		};
+	}
+}
+function ab(x,y,num){
+
+	for(var i=0; i<digit[num].length;i++){
+		for(var j=0;j<digit[num][i].length;j++){
+			if (digit[num][i][j]==1) {
+				var aboll={
+					x:x+j*2*(r+1)+(r+1),
+					y:y+i*2*(r+1)+(r+1),
+					g:1.5+Math.random(),
+					vx:Math.pow(-1,Math.ceil(Math.random()*1000))*4,
+					vy:-5,
+					color:colors[Math.floor(Math.random()*colors.length)]
+				}
+				balls.push(aboll)
+			
+			};
+		}
+	}
+}
+
+function render(con){
+	con.clearRect(0,0,canvas.width,canvas.height);
+	var hours=parseInt(curshowtimesendconds/3600);
+	var m=parseInt((curshowtimesendconds-hours*3600)/60);
+	var s=curshowtimesendconds%60;
+	var hours=12;
+	var m=45;
+	var s=44;
+
+
+	renderDigit(margin_left,margin_top,parseInt(hours/10),con);
+	renderDigit(margin_left+16*(r+1),margin_top,parseInt(hours%10),con);
+	renderDigit(margin_left+32*(r+1),margin_top,10,con);
+	renderDigit(margin_left+42*(r+1),margin_top,parseInt(m/10),con);
+	renderDigit(margin_left+58*(r+1),margin_top,parseInt(m%10),con);
+	renderDigit(margin_left+74*(r+1),margin_top,10,con);
+	renderDigit(margin_left+84*(r+1),margin_top,parseInt(s/10),con);
+	renderDigit(margin_left+100*(r+1),margin_top,parseInt(s%10),con);
+
+	for(var i=0;i<balls.length;i++){
+		con.fillStyle=balls[i].color;
+		con.beginPath();
+		con.arc(balls[i].x,balls[i].y,r,0,2*Math.PI,true);
+		con.closePath();
+		con.fill();
+	}
+
+}
+
+function renderDigit(x,y,num,con){
+	con.fillStyle="rgb(0,102,153)";
+
+	for(var i=0;i<digit[num].length;i++){
+		for(var j=0;j<digit[num][i].length;j++){
+			if(digit[num][i][j]==1){
+				con.beginPath();
+				con.arc(x+j*2*(r+1)+(r+1),y+i*2*(r+1)+(r+1),r,0,2*Math.PI)
+				con.closePath()
+
+				con.fill()
+
+			}
+		}
+	}
+}
+</script>
+</html>

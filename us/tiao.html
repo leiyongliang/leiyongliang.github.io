@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>tiao</title>
+	<script type="text/javascript" src="digit.js"></script>
+	<script type="text/javascript">
+		var r=8;
+		var margin_top=0;
+		var margin_left=0;
+		var m=0;
+	    var s=6;
+		var balls=[];
+		const colors=["#ff00ff","#0099cc","#Aa66Cc","#9933cc","#99cc00","#669900"]
+
+		window.onload=function(){
+			var canvas=document.getElementById('canvas')
+			var con=canvas.getContext("2d")
+			canvas.width=800;
+			canvas.height=200;
+			time=setInterval(function(){render(con)},1000)
+			setTimeout("t1()",6000)
+		}
+
+	function t1(){
+		clearInterval(time)
+		open("loge.html","_self")
+	}
+	function render(con){
+	con.fillStyle = "#393550";
+	con.fillRect(0,0,800,200);
+	//con.clearRect(0,0,1024,768);
+	s-=1;
+	renderDigit(margin_left,margin_top,parseInt(m/10),con);
+	renderDigit(margin_left+16*(r+1),margin_top,parseInt(m%10),con);
+	renderDigit(margin_left+32*(r+1),margin_top,10,con);
+	renderDigit(margin_left+42*(r+1),margin_top,parseInt(s/10),con);
+	renderDigit(margin_left+58*(r+1),margin_top,parseInt(s%10),con);	
+	}
+
+
+
+
+function renderDigit(x,y,num,con){
+	con.fillStyle=colors[Math.floor(Math.random()*colors.length)];
+
+	for(var i=0;i<digit[num].length;i++){
+		for(var j=0;j<digit[num][i].length;j++){
+			if(digit[num][i][j]==1){
+				con.beginPath();
+				con.arc(x+j*2*(r+1)+(r+1),y+i*2*(r+1)+(r+1),r,0,2*Math.PI)
+				con.closePath()
+
+				con.fill()
+
+			}
+		}
+	}
+}
+
+	</script>
+	<style type="text/css">
+	#div{
+		position: absolute;
+		top: 50%;
+		left: 55%;
+		margin-top: -70px;
+		margin-left: -400px;
+	}
+	body{
+		background-color: #393550
+	}
+
+
+	</style>
+
+</head>
+<body id="body">
+<div id="div"><canvas id="canvas"></canvas></div>
+
+</body>
+</html>

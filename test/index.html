@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Yoler</title>
+    <link rel="stylesheet" href="icon.css">
+    <link rel="stylesheet" href="icons.css">
+    <link rel="stylesheet" href="vue-material.css">
+    <!-- <script src="output/static/app.js"></script> -->
+    <script src="vue-material.js"></script>
+    <script src="vue.js"></script>
+    <style media="screen">
+    html,body,.app-viewport {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .app-viewport {
+      display: flex;
+      flex-flow: column;
+    }
+
+    .md-fab {
+      margin: 0;
+      position: absolute;
+      bottom: -20px;
+      left: 16px;
+
+      .md-icon {
+        color: #fff;
+      }
+    }
+
+    .md-title {
+      padding-left: 8px;
+      color: #fff;
+    }
+    .md-list {
+        overflow: auto;
+        }
+
+        .md-list-action .md-icon {
+        color: rgba(#000, .26);
+        }
+
+        .md-avatar-icon .md-icon {
+        color: #fff !important;
+        }
+
+        .md-sidenav .md-list-text-container > :nth-child(2) {
+        color: rgba(#fff, .54);
+        }
+
+        .md-account-header {
+        .md-list-item:hover .md-button:hover {
+        background-color: inherit;
+        }
+
+        .md-avatar-list .md-list-item-container:hover {
+        background: none !important;
+        }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <md-toolbar>
+              <div class="md-toolbar-container">
+                  <md-button class="md-icon-button" @click="$refs.sidebar.toggle()">
+                    <md-icon>menu</md-icon>
+                  </md-button>
+
+                  <span style="flex: 1"></span>
+
+                  <md-button class="md-icon-button">
+                    <md-icon>search</md-icon>
+                  </md-button>
+
+                  <md-button class="md-icon-button">
+                    <md-icon>view_module</md-icon>
+                  </md-button>
+                </div>
+                <!-- <div class="md-toolbar-container">
+                    <h2 class="md-title">My Files</h2>
+
+                  <md-button class="md-fab md-mini">
+                    <md-icon>add</md-icon>
+                  </md-button>
+                </div> -->
+        </md-toolbar>
+        <md-sidenav class="md-left md-fixed" ref="sidebar">
+              <md-toolbar class="md-account-header">
+                <md-list class="md-transparent">
+                  <md-list-item class="md-avatar-list">
+                    <md-avatar class="md-large">
+                      <img src="http://tva1.sinaimg.cn/crop.0.0.996.996.1024/ba1bda97jw8f9a5ka5bbzj20ro0rowhl.jpg" alt="People">
+                    </md-avatar>
+
+                    <span style="flex: 1"></span>
+
+                  </md-list-item>
+
+                  <md-list-item>
+                    <div class="md-list-text-container">
+                      <span>Yoler</span>
+                      <span>lylandlyt@gmail.com</span>
+                    </div>
+
+                    <md-button class="md-icon-button md-list-action">
+                      <md-icon>arrow_drop_down</md-icon>
+                    </md-button>
+                  </md-list-item>
+                </md-list>
+              </md-toolbar>
+
+              <md-list>
+                <md-list-item @click="$refs.sidebar.toggle()" class="md-primary">
+                  <md-icon>insert_drive_file</md-icon> <span>文件</span>
+                </md-list-item>
+
+                <md-list-item @click="$refs.sidebar.toggle()">
+                  <md-icon>share</md-icon> <span>分享</span>
+                </md-list-item>
+
+                <md-list-item @click="$refs.sidebar.toggle()">
+                  <md-icon>access_time</md-icon> <span>最近</span>
+                </md-list-item>
+
+                <md-list-item @click="$refs.sidebar.toggle()">
+                  <md-icon>start</md-icon> <span>收藏</span>
+                </md-list-item>
+
+                <md-list-item @click="$refs.sidebar.toggle()">
+                  <md-icon>delete</md-icon> <span>回收站</span>
+                </md-list-item>
+              </md-list>
+            </md-sidenav>
+          <md-tabs md-fixed>
+              <md-tab id="movies" md-label="电影">
+                <p>You say that you love rain,but you open your umbrella when it rains.
+
+                You say that you love the sun,but you find a shadow spot when the sun shines.</p>
+
+                    <p>You say that you love the wind,but you close your windows when wind blows.
+
+                This is why I am afraid,you say that you love me too.</p>
+              </md-tab>
+
+              <md-tab id="music" md-label="音乐">
+                <p>For us,life is a dance,a movement of rhythms,directions,stumbles,missteps,at times slow and precise,or fast and wild and joyous.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
+              </md-tab>
+
+              <md-tab id="books" md-label="读书">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
+              </md-tab>
+
+              <md-tab id="pictures" md-label="图片">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
+              </md-tab>
+            </md-tabs>
+          <md-bottom-bar style="position: absolute; bottom:0">
+            <md-bottom-bar-item md-icon="history">最近</md-bottom-bar-item>
+            <md-bottom-bar-item md-icon="favorite" md-active>喜爱</md-bottom-bar-item>
+            <md-bottom-bar-item md-icon="near_me">附近</md-bottom-bar-item>
+          </md-bottom-bar>
+
+
+    </div>
+
+</body>
+<script type="text/javascript">
+    Vue.use(VueMaterial);
+    Vue.material.registerTheme({
+      default: {
+        primary: 'blue',
+        accent: 'red'
+      },
+      green: {
+        primary: 'green',
+        accent: 'pink'
+      },
+      orange: {
+        primary: 'orange',
+        accent: 'green'
+      },
+    })
+    var App = new Vue({
+        el: '#app',
+        methods: {
+           toggleLeftSidenav() {
+             this.$refs.leftSidenav.toggle();
+           },
+           toggleRightSidenav() {
+             this.$refs.rightSidenav.toggle();
+           },
+           closeRightSidenav() {
+             this.$refs.rightSidenav.close();
+           },
+         }
+    })
+</script>
+</html>

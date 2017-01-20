@@ -1,0 +1,194 @@
+body{
+	background: #aaa;
+	margin:0;
+	padding: 0;
+}
+.main-wapper{
+	background: #444 url("../img/1.jpg");
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+header{
+	background:rgba(0,0,0,0.3);
+}
+nav{
+	background: transparent;
+	height: 50px;
+    ul li,.logo{
+    	display:inline-block;
+		line-height: 50px;
+		margin-right:20px;
+    }
+	a{
+		line-height: 50px;
+		text-decoration: none;
+		display:inline-block;
+		height:inherit;
+		color:#fff;
+	}
+	.logo{
+			float:left;
+			font-size: 20px;
+			font-weight: 700;
+			letter-spacing: 2px;//字体间距
+			
+		}
+
+	ul{
+		list-style:none;//去掉前面的点
+		margin: 0;
+		float:right;
+		li{
+			a{
+				
+			}
+		
+		}
+
+	}
+}
+#banner{
+	height: 600px;
+	background: transparent;
+	.inner{
+		max-width:300px;
+		text-align: center;
+		margin: 0 auto;
+		position: relative;
+		top:160px;
+		color:#fff;
+		h1{
+			margin: 0px;
+		}
+
+		.more{
+			margin-top: 200px;
+		}
+	}
+
+	button{
+		padding: 14 28px;
+		font-size:20px;
+		letter-spacing: 4px;
+		border-radius: 6px;
+		background: #18a;
+	}
+}
+
+button{
+	border:none;
+	background: #333;
+	color:#eee;
+	padding:10px;
+
+}
+
+.sub-heading{
+	line-height: 30px;
+	margin: 30px;
+}
+.hr {
+	width:100px;
+	height: 2px;
+	margin: 20px auto;
+}
+.green-section{
+	background: #089Db0;
+	color:#fff;
+	text-align: center;
+	padding: 100px 0;
+
+	.hr{
+       background: #078494;
+       width:60%;
+    }
+
+    .icon-group{
+    	margin-top: 20px;
+    	.icon{
+    		display:inline-block;
+    		width:80px;
+    		height:80px;
+    		background: #0d6f7c;
+    		transform:rotate(45deg);
+    		margin:20px;
+
+    	}
+    }
+}
+.wrapper{
+	max-width:1080px;
+	margin: 0 auto;
+}
+
+.gray-section{
+	background: #000;
+	color:#fff;
+
+	h2{
+		font-size:12px;
+	}
+	.article-preview > div{
+		float:left;
+		font-size:0;
+	}
+	.article-preview:nth-child(odd){
+		background-color: rgba(255,255,255,0.05);
+	}
+	.article-preview:after{
+		content:'';
+		display:block;
+		clear:both;
+	}
+	.img-section{
+		width:45%;
+
+		img{
+			width:50%;
+		}
+	}
+
+	.text-section{
+		width:55%;
+		position: relative;
+		top:68px;
+		left:50px;
+
+		h2{
+			margin-bottom: 20px;
+		}
+		p{
+			font-size: 18px;
+			letter-spacing: 1px;
+		}
+	}
+
+	.text-section > *{
+		max-width:90%;
+	}
+}
+
+footer{
+	min-height:150px;
+	text-align: center;
+	background: #000;
+	color:#fff;
+	margin: 0 auto;
+	padding: 50px;
+
+	ul{
+		list-style:none;
+		margin: 0;
+
+		li{
+			display:inline-block;
+			padding: 10px;
+		}
+	}
+
+	.copy{
+		margin-bottom: 20px
+	}
+}

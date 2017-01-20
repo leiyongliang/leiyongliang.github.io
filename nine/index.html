@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<head>
+<title>移动端相册</title>
+<script type="text/javascript" src="zepto.min.js"></script>
+<script type="text/javascript" src="touch.js"></script>
+<link rel="stylesheet" type="text/css" href="animate.css">
+<style type="text/css">
+	body,ul,li{
+		padding: 0;
+		margin: 0;
+		font-size: 62.5%;
+	}
+	body{
+		background-color: #000;
+		background: url(bg1.jpg) no-repeat;
+		background-size: 100%;
+	}
+	header{
+		height: 3rem;
+		line-height: 3rem;
+		font-size:2rem;
+		background-color:rgba(0,0,0,0.2);
+		border-radius: 1.2rem;
+		color: #fff;
+		text-align: center;
+		text-shadow: 4px 2px 2px #000;
+		margin: 1rem 0 1rem 0;
+	}
+	ul{
+		list-style: none;
+	}
+	li{
+		float: left;
+		overflow:hidden;
+		text-align: center;
+		border-radius: 10px;
+		font-size: 1.6rem;
+		color: yellow;
+		background-color: rgba(22,45,67,0.7);
+	}
+	.large{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background: url(bg.jpg) no-repeat;
+		background-size: 100%;
+		display: none;
+		overflow: hidden;
+	}
+	.large .large_img{
+		position: absolute;
+		background-color: rgba(255,255,255,0.7);
+		border-radius: 20px;
+		width: 90%;
+		height: 400px;
+		top: 50%;
+		margin-top:-200px;
+		display: none;
+		font-size: 1.2rem;
+		color: #333;
+		padding: 1rem;
+		text-align: center;
+
+	}
+</style>
+</head>
+<body>
+<header>匆匆过去的九年 </header>
+<ul class="img-container" id="container"></ul>
+<div class="large animated fadeIn" id="large_container">
+	<div class="large_img d1">第一年，我还在初二，那时候我是一个腼腆又傲娇的男孩</div>
+	<div class="large_img d2">第二年，我初三，都快记不得了</div>
+	<div class="large_img d3">第三年，转眼间就到了高一，个子也飞快的长起来</div>
+	<div class="large_img d4">第四年，高二那年，我选择了理科</div>
+	<div class="large_img d5">第五年，高三，也不像其他人那么紧张</div>
+	<div class="large_img d6">第六年，到了一个不喜欢也不讨厌的大学，选择了一个莫名其妙的专业</div>
+	<div class="large_img d7">第七年，这一年，大部分躺在床上</div>
+	<div class="large_img d8">第八年，专业课开始了，我也开始挂科</div>
+	<div class="large_img d9">第九年，匆忙的找工作，把自己塞出去<br/>END....</div>
+</div>
+</body>
+<script type="text/javascript">
+	var total=9;
+	var zwin=$(window);
+	var render=function(){
+		var padding=4;
+		var winwidth=zwin.width();
+		var picwidth=Math.floor((winwidth-padding*3)/3);
+		var tmpl = '';
+		for(var i=1;i<=total;i++){
+			var p=padding;
+			if(i%3==1){
+				p=2;
+			}
+			tmpl+='<li data-id="'+i+'" class="animated bounceIn" style="width:'+picwidth+'px;height:'+picwidth+'px;line-height:'+picwidth+'px; margin-left:'+p+'px;margin-top:'+padding+'px;">第'+i +'年</li>'
+
+		}
+		$("#container").html(tmpl)
+	}
+	render();
+	var wImage=$('.large_img');
+	var showdiv = function(id,callback){
+		$('#large_container').css({
+			width:zwin.width(),
+			height:zwin.height()
+		}).show();
+		
+		for(var i=1;i<=total;i++){
+			if(i==parseInt(id)){
+				
+				$('.d'+i).show()
+			}else{
+				$('.d'+i).hide()
+			}
+		}
+		callback&&callback();
+
+		
+		
+	}
+	var cid;
+	$("#container").delegate('li','tap',function(){
+		var _id=cid=$(this).attr('data-id');
+		showdiv(_id)
+	});
+	
+	$("#large_container").tap(function(){
+		$(this).hide();
+	}).swipeLeft(function(){
+		
+		domImage=wImage[cid-1]
+		cid++;
+		
+		jImage=$('.d'+cid)
+		if(cid>total){
+			cid=total;
+
+		}else{
+			showdiv(cid,function(){
+				domImage.addEventListener('webkitAnimationEnd',function(){
+					jImage.removeClass('animated bounceInRight');
+					domImage.removeEventListener('webkitAnimationEnd',function(){},false);
+				},false)
+				jImage.addClass('animated bounceInRight')
+			});
+		}
+
+	}).swipeRight(function(){
+		
+		domImage=wImage[cid-1]
+		cid--;
+		
+		jImage=$('.d'+cid)
+		if(cid<1){
+			cid=1;
+			
+		}else{
+			showdiv(cid,function(){
+				domImage.addEventListener('webkitAnimationEnd',function(){
+					jImage.removeClass('animated bounceInLeft');
+					domImage.removeEventListener('webkitAnimationEnd',function(){},false);
+				},false)
+				jImage.addClass('animated bounceInLeft')
+			})
+		}
+	});
+</script>
+</html>
