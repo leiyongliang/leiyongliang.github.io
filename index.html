@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
+<style>
 body{
     overflow: hidden;
 }
@@ -43,23 +38,35 @@ body{
         bottom: -7px;
         cursor: ne-resize;
     }
+    #rotate{
+        left: 50%;
+        top: 100%;
+        margin: 20px 0 0 -7px;
+        cursor: pointer;
+    }
+    #rotate::before{
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: -20px;
+        width: 0;
+        height: 20px;
+        margin-left: -1px;
+        border-left:1px dashed red; 
+    }
 </style>
 
-</head>
-<body>
-    <div id="polyline" style="transform: translate(20px,30px);">
-    <svg width="100%" height="100%" version="1.1"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
-    <polygon fill="#000000" points="146.4,500 138.5,361.5 0,353.5 92.4,250 0,146.4 138.5,138.5 146.4,0 250,92.4 353.5,0 361.5,138.5 500,146.4 407.7,250 500,353.5 361.5,361.5 353.5,500 239,408.9"></polygon>
-    </svg>
-    <span id="resize1"></span>
-    <span id="resize2"></span>
-    <span id="resize3"></span>
-    <span id="resize4"></span>
-    </div>
-</body>
 
-
-
+<div id="polyline" style="transform: translate(20px,30px);">
+<svg width="100%" height="100%" version="1.1"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+<polygon fill="#000000" points="146.4,500 138.5,361.5 0,353.5 92.4,250 0,146.4 138.5,138.5 146.4,0 250,92.4 353.5,0 361.5,138.5 500,146.4 407.7,250 500,353.5 361.5,361.5 353.5,500 239,408.9"></polygon>
+</svg>
+<span id="resize1"></span>
+<span id="resize2"></span>
+<span id="resize3"></span>
+<span id="resize4"></span>
+<span id="rotate"></span>
+</div>
 <script>
 var polyline =  document.getElementById('polyline');
    var x,y,tx,ty;
@@ -79,10 +86,11 @@ window.onload = function () {
         polyline.removeEventListener('mousemove',move)
     })
 
-    var rz = new Resize('resize1', 1);
-    var rz = new Resize('resize2', 2);
-    var rz = new Resize('resize3', 3);
-    var rz = new Resize('resize4', 4);
+    var rz1 = new Resize('resize1', 1);
+    var rz2 = new Resize('resize2', 2);
+    var rz3 = new Resize('resize3', 3);
+    var rz4 = new Resize('resize4', 4);
+    var ro = new Resize('rotate', 5);
    
 }
 function move(event) {
@@ -137,29 +145,32 @@ Resize.prototype.fnmove = function (e)  {
     this.disY = e.clientY - this.clickY;
     if (this.dir == 1) {
         polyline.style.width = this.width - this.disX + 'px';
-        polyline.style.height = this.height - this.disY + 'px';
+        polyline.style.height = this.height - this.disX + 'px';
 
-        var mx = parseInt(this.tx) + parseInt(this.disX),my = parseInt(this.ty) + parseInt(this.disY);
+        var mx = parseInt(this.tx) + parseInt(this.disX),my = parseInt(this.ty) + parseInt(this.disX);
         polyline.style.transform = 'translate('+ mx + 'px,' + my + 'px)';
 
     }
     else if (this.dir == 2) {
         polyline.style.width = this.width + this.disX + 'px';
-        polyline.style.height = this.height - this.disY + 'px';
+        polyline.style.height = this.height + this.disX + 'px';
 
-        var mx = parseInt(this.tx),my = parseInt(this.ty) + parseInt(this.disY);
+        var mx = parseInt(this.tx),my = parseInt(this.ty) - parseInt(this.disX);
         polyline.style.transform = 'translate('+ mx + 'px,' + my + 'px)';
     }
     else if (this.dir == 3) {
         polyline.style.width = this.width + this.disX + 'px';
-        polyline.style.height = this.height + this.disY + 'px';
+        polyline.style.height = this.height + this.disX + 'px';
     }
-    else {
+    else if (this.dir == 4){
         polyline.style.width = this.width - this.disX + 'px';
-        polyline.style.height = this.height + this.disY + 'px';
+        polyline.style.height = this.height - this.disX + 'px';
 
         var mx = parseInt(this.tx) + parseInt(this.disX),my = parseInt(this.ty);
         polyline.style.transform = 'translate('+ mx + 'px,' + my + 'px)';
+    }
+    else if (this.dir == 5) {
+        polyline.style.transform = 'translate('+ this.tx + 'px,' + this.ty + 'px) rotateZ('+-this.disX+'deg)';
     }
     
 }
@@ -170,4 +181,3 @@ Resize.prototype.fnup = function () {
 }
 </script>
 
-</html>
