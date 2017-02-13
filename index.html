@@ -1,0 +1,162 @@
+<style>
+body{
+    overflow: hidden;
+}
+    div{
+        position: absolute;
+        height: 500px;
+        width: 500px;
+        outline: 1px dashed red;
+        cursor: move;
+    }
+    span{
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border-radius: 7px;
+        border: 1px solid red;
+        background: #fff;
+        box-sizing: border-box;
+    }
+    #resize1{
+        left: -7px;
+        top: -7px;
+        cursor: nw-resize;
+    }
+    #resize2{
+        right: -7px;
+        top: -7px;
+        cursor: ne-resize;
+    }
+    #resize3{
+        right: -7px;
+        bottom: -7px;
+        cursor: nw-resize;
+    }
+    #resize4{
+        left: -7px;
+        bottom: -7px;
+        cursor: ne-resize;
+    }
+</style>
+
+
+<div id="polyline" style="transform: translate(20px,30px);">
+<svg width="100%" height="100%" version="1.1"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+<polygon fill="#000000" points="146.4,500 138.5,361.5 0,353.5 92.4,250 0,146.4 138.5,138.5 146.4,0 250,92.4 353.5,0 361.5,138.5 500,146.4 407.7,250 500,353.5 361.5,361.5 353.5,500 239,408.9"></polygon>
+</svg>
+<span id="resize1"></span>
+<span id="resize2"></span>
+<span id="resize3"></span>
+<span id="resize4"></span>
+</div>
+<script>
+var polyline =  document.getElementById('polyline');
+   var x,y,tx,ty;
+window.onload = function () {
+   polyline.addEventListener('mousedown',function(event) {
+        // x = event.clientX-this.offsetLeft;
+        // y = event.clientY-this.offsetTop;
+        
+        x = event.clientX;
+        y = event.clientY;
+        tx = this.style.transform.match(/[-]?\d+/)[0];
+        ty = this.style.transform.match(/, ([-]?\d+)/)[1];
+        
+        polyline.addEventListener('mousemove',move)
+    })
+    polyline.addEventListener('mouseup',function(){
+        polyline.removeEventListener('mousemove',move)
+    })
+
+    var rz = new Resize('resize1', 1);
+    var rz = new Resize('resize2', 2);
+    var rz = new Resize('resize3', 3);
+    var rz = new Resize('resize4', 4);
+   
+}
+function move(event) {
+    var disx = event.clientX - x;
+    var disy = event.clientY - y;
+    var mx = parseInt(tx) + parseInt(disx),my = parseInt(ty) + parseInt(disy);
+    this.style.transform = 'translate('+ mx + 'px,' + my + 'px)';
+    // this.style.left = event.clientX - x + 'px';
+    // this.style.top = event.clientY - y + 'px';
+}
+
+function Resize(id, dir) {
+    this.dom = document.getElementById(id);
+    this.disX = 0;
+    this.disY = 0;
+    this.clickX = 0;
+    this.clickY = 0;
+    this.width = 0;
+    this.height = 0;
+    this.dir = dir;
+    this.tx = 0;
+    this.ty = 0;
+    var _this = this;
+
+    this.dom.onmousedown = function(e) {
+        _this.fndown(e);
+        return false;
+    }
+}
+Resize.prototype.fndown = function(e) {
+    e.stopPropagation();
+    this.clickX = e.clientX;
+    this.clickY = e.clientY;
+    this.width = polyline.clientWidth;
+    this.height = polyline.clientHeight;
+    this.tx = polyline.style.transform.match(/[-]?\d+/)[0];
+    this.ty = polyline.style.transform.match(/, ([-]?\d+)/)[1];
+    var _this = this;
+    
+
+    document.onmousemove = function (e) {
+        _this.fnmove(e);
+    }
+
+    document.onmouseup = function (e) {
+        _this.fnup(e);
+    }
+}
+
+Resize.prototype.fnmove = function (e)  {
+    this.disX = e.clientX - this.clickX;
+    this.disY = e.clientY - this.clickY;
+    if (this.dir == 1) {
+        polyline.style.width = this.width - this.disX + 'px';
+        polyline.style.height = this.height - this.disY + 'px';
+
+        var mx = parseInt(this.tx) + parseInt(this.disX),my = parseInt(this.ty) + parseInt(this.disY);
+        polyline.style.transform = 'translate('+ mx + 'px,' + my + 'px)';
+
+    }
+    else if (this.dir == 2) {
+        polyline.style.width = this.width + this.disX + 'px';
+        polyline.style.height = this.height - this.disY + 'px';
+
+        var mx = parseInt(this.tx),my = parseInt(this.ty) + parseInt(this.disY);
+        polyline.style.transform = 'translate('+ mx + 'px,' + my + 'px)';
+    }
+    else if (this.dir == 3) {
+        polyline.style.width = this.width + this.disX + 'px';
+        polyline.style.height = this.height + this.disY + 'px';
+    }
+    else {
+        polyline.style.width = this.width - this.disX + 'px';
+        polyline.style.height = this.height + this.disY + 'px';
+
+        var mx = parseInt(this.tx) + parseInt(this.disX),my = parseInt(this.ty);
+        polyline.style.transform = 'translate('+ mx + 'px,' + my + 'px)';
+    }
+    
+}
+
+Resize.prototype.fnup = function () {
+    document.onmousemove = null;
+    document.onmouseup = null;
+}
+</script>
+
