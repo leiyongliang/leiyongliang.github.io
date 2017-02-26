@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Stay with you</title>
+	<style>
+		body{
+			background: #000;
+			color: #fff;
+			font-family: '微软雅黑'
+		}
+		#dazi{
+			text-indent: 14px;
+			word-break: break-all;
+			padding: 10px;
+			box-sizing: border-box;
+			letter-spacing: 2px;
+			font-size: 18px;
+		}
+	</style>
+  </head>
+  <body>
+    <div id="dazi"></div>
+    <script>
+      window.onload=function(){
+        var msg="嗨！很抱歉过了这么久才给你这个惊喜，不知道你喜不喜欢，关于我们之间，我想重新定义一下";
+        function daziStart(id,msg,speed){
+		  this.id = document.getElementById(id);
+		  this.msg = msg;
+	      this.seq = 0;
+		  this.speed = speed;
+		  var _this = this;
+           var timeId=setInterval(function(){
+				dazi.innerHTML=_this.msg.substring(0,_this.seq)+'_';
+				if(_this.seq<=_this.msg.length){
+                	_this.seq++;
+				}else{
+				clearInterval(timeId)
+				dazi.innerHTML=msg.substring(0,_this.seq)
+				new Del('dazi',msg,400);
+			}
+		  },_this.speed);
+        }
+
+		function Del(id,msg,speed){
+		  this.id = document.getElementById(id);
+		  this.msg = msg;
+	      this.seq = this.msg.length;
+		  this.speed = speed;
+		  var _this = this;
+           var timeId=setInterval(function(){
+				dazi.innerHTML=_this.msg.substring(0,_this.seq)+'_';
+				if(_this.seq>_this.msg.length - 4){
+                	_this.seq--;
+				}else{
+				clearInterval(timeId)
+				dazi.innerHTML=msg.substring(0,_this.seq)
+				
+			}
+		  },_this.speed);
+        }
+        new daziStart('dazi',msg,200);
+		
+      }
+    </script>
+  </body>
+  </html>
+  
+<!--<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+  <style>
+      #one,#two{ width:400px; height:300px; border:1px solid red;padding:10px;}
+       #two{ border:1px solid #339; }
+  </style>
+
+</head>
+
+<body>
+        <div id="two">
+         一个是 HTML/SVG/XHTML，事实上，Webkit 有三个 C++ 的类对应这三类文档。解析这三种文件会产生一个 DOM Tree。
+CSS，解析 CSS 会产生 CSS 规则树。
+Javascript，脚本，主要是通过 DOM API 和 CSSOM API 来操作 DOM Tree 和 CSS Rule Tree.
+　　2）解析完成后，浏览器引擎会通过 DOM Tree 和 CSS Rule Tree 来构造 Rendering Tree。注意：
+Rendering Tree 渲染树并不等同于 DOM 树，因为一些像 Header 或 display:none 的东西就没必要放在渲染树中了。
+CSS 的 Rule Tree 主要是为了完成匹配并把 CSS Rule 附加上 Rendering Tree 上的每个 Element。也就是 DOM 结点。也就是所谓的 Frame。
+然后，计算每个 Frame（也就是每个 Element）的位置，这又叫 layout 和 reflow 过程。
+        </div>
+    <div  id="one"></div>
+    
+    
+      <script>
+ 		
+       
+         var prints = function ( target,str ,speed){
+ 	        var timer = null;
+		    var count = 0;
+ 	        timer = setInterval(function(){
+			  
+			  if( count >= str.length ){
+				 
+				 clearInterval(timer);
+				  
+				  }else{
+ 					target.innerHTML = str.substring( 0,count )+'_';
+					count++;  
+ 					  }
+ 			  },speed)
+ 		 };
+      
+         var  oDiv = document.getElementById("one");
+         var  oDiv2 = document.getElementById('two');
+        
+		 var str  = oDiv2.innerHTML;
+       setTimeout(function(){
+		    
+			prints( oDiv ,str, 100 );
+		   
+		   },100);
+      </script>
+</body>
+</html>
+
+ -->
