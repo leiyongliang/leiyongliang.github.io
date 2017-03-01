@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+</head>
+<body>
+    <div class="scroll_box" ref="scroll_box" id="app">
+        <div class="page_content" :style="{top: page_content_top}" ref="page_content">
+            <div class="page_item" v-for="(value, index) in pages">
+                <div class="page_wrap" @click="page_seledt(index)" :class="{border: value.state}">
+                    <div class="page_thumbnail"></div>
+                    <div class="page_name">
+                        <span>{{index}}</span>
+                        <input type="text" v-model="value.name">
+                    </div>
+                    <div class="page_tool" v-show="value.state">
+                        <div class="page_del"></div>
+                        <div class="page_liked"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="warp_scroll_bar" v-show="scroll_bar_state"  ref="scroll_bar">
+            <div class="scroll_bar" :style="{top: scroll_bar_top,height: scroll_bar_height}" :class="{ready:  mousestate}"></div>
+        </div>
+    </div>
+</body>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    pages: [
+        {
+          name: '遇见',
+          id: 0,
+          msg: '描述。。。。',
+          state: 0
+        },
+        {
+          name: '黄昏',
+          id: 1,
+          msg: '描述。。。。',
+          state: 0
+        },
+        {
+          name: '向往',
+          id: 2,
+          msg: '描述。。。。',
+          state: 0
+        },
+        {
+          name: '故乡山川',
+          id: 3,
+          msg: '描述。。。。',
+          state: 0
+        },
+        {
+          name: '故乡山川',
+          id: 4,
+          msg: '描述。。。。',
+          state: 0
+        },
+        {
+          name: '麦田',
+          id: 5,
+          msg: '描述。。。。',
+          state: 0
+        },
+        {
+          name: '青春',
+          id: 6,
+          msg: '描述。。。。',
+          state: 0
+        }
+      ],
+      page_content_top: 0,
+      speed: 0,
+      scroll_bar_top: 0,
+      scroll_bar_height: 0,
+      rate: 0,
+      scroll_bar_state: 0,
+      prev_index: 0,
+      disy: 0,
+      curspeed: 0,
+      mousestate: 0
+  },
+  mounted () {
+    this.$refs.scroll_box.addEventListener('mousewheel', this.scroll)
+    this.$refs.scroll_box.addEventListener('mouseover', () => { this.scroll_bar_state = 1 })
+    this.$refs.scroll_box.addEventListener('mouseout', () => { this.scroll_bar_state = 0 })
+    this.$refs.scroll_bar.addEventListener('mousedown', this.scroll_bar_down)
+    window.addEventListener('resize', this.initscrollbar)
+window.onload = () => {this.initscrollbar()}
+  },
+  methods: {
+    scroll (event) {
+      if (this.$refs.scroll_box.offsetHeight - this.$refs.page_content.offsetHeight <= 0) {
+        if (event.wheelDelta === 120) {
+          this.speed += 50
+          if (this.speed >= 0) {
+            this.speed = 0
+          }
+          this.page_content_top = this.speed + 'px'
+          this.scroll_bar_top = -this.speed * this.rate + 2 + 'px'
+        } else if (event.wheelDelta === -120) {
+          this.speed -= 50
+          if (this.$refs.scroll_box.offsetHeight - this.$refs.page_content.offsetHeight >= this.speed) {
+            this.speed = this.$refs.scroll_box.offsetHeight - this.$refs.page_content.offsetHeight
+          }
+          this.page_content_top = this.speed + 'px'
+          this.scroll_bar_top = -this.speed * this.rate + 2 + 'px'
+        }
+      }
+    },
+    initscrollbar () {
+      if (this.$refs.scroll_box.offsetHeight - this.$refs.page_content.offsetHeight <= 0) {
+        this.rate = this.$refs.scroll_box.offsetHeight / this.$refs.page_content.offsetHeight
+        this.scroll_bar_height = this.rate * this.$refs.scroll_box.offsetHeight - 4 + 'px'
+        this.scroll_bar_top = -this.speed * this.rate + 2 + 'px'
+        if (this.$refs.scroll_box.offsetHeight - this.$refs.page_content.offsetHeight >= this.speed) {
+          this.speed = this.$refs.scroll_box.offsetHeight - this.$refs.page_content.offsetHeight
+          this.page_content_top = this.speed + 'px'
+          this.scroll_bar_top = -this.speed * this.rate + 2 + 'px'
+        }
+      } else {
+        this.speed = 0
+        this.page_content_top = this.speed + 'px'
+        this.scroll_bar_height = 0
+      }
+    },
+    scroll_bar_down (event) {
+      this.disy = event.clientY
+      document.addEventListener('mousemove', this.scroll_bar_move)
+      document.addEventListener('mouseup', this.scroll_bar_up)
+      this.curspeed = this.speed * this.rate
+      this.mousestate = 1
+    },
+    scroll_bar_move (event) {
+      document.body.style.cursor = 'default'
+      var y = this.disy - event.clientY
+      this.speed = (this.curspeed + y) / this.rate
+      if (this.speed >= 0) {
+        this.speed = 0
+      }
+      if (this.$refs.scroll_box.offsetHeight - this.$refs.page_content.offsetHeight >= this.speed) {
+        this.speed = this.$refs.scroll_box.offsetHeight - this.$refs.page_content.offsetHeight
+      }
+      this.page_content_top = this.speed + 'px'
+      this.scroll_bar_top = -this.speed * this.rate + 2 + 'px'
+    },
+    scroll_bar_up () {
+      document.removeEventListener('mousemove', this.scroll_bar_move)
+      this.mousestate = 0
+    },
+    page_seledt (index) {
+      this.pages[this.prev_index].state = 0
+      this.prev_index = index
+      this.pages[index].state = 1
+    }
+  }
+})
+</script>
+<style>
+  body{
+    -webkit-user-select: none
+  }
+  .scroll_box{
+    position: absolute;
+    width: 184px;
+    top: 0;
+    right: 5px;
+    bottom: 0;
+    overflow: hidden;
+}
+.page_content{
+    position: absolute;
+    top: 0;
+    width: 184px;
+    background: #f8f8f8;
+}
+.page_item{
+    width: 100%;
+    height: 170px;
+    padding: 20px 0;
+}
+.page_item:hover{
+    background-color: #CFD8DC;
+}
+.page_wrap{
+    position: relative;
+    height: 100%;
+    /*border: 1px solid red;*/
+    margin: -1px 38px;
+    padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.border{
+    border: 2px solid red;
+}
+.warp_scroll_bar{
+    position: absolute;
+    right: 2px;
+    top: 0;
+    width: 8px;
+    background: transparent;
+    height: 100%;
+    overflow: hidden;
+}
+.scroll_bar{
+    position: absolute;
+    top: 0;
+    background: #999;
+    right: 0;
+    width: 5px;
+    border-radius: 2px;
+    /*transition: all .3s linear;*/
+}
+.scroll_bar:hover{
+    background: #666;
+}
+.ready{
+    background: #666;
+}
+.page_thumbnail{
+    height: 80%;
+    background: url('./p.png') no-repeat center;
+    background-size: 100%;
+}
+.page_name{
+    height: 15%;
+    margin-top: 5%;
+    box-sizing: border-box;
+}
+.page_name span{
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    line-height: 25px;
+}
+.page_name input{
+    float: right;
+    height: 100%;
+    width: 80%;
+    border: none;
+    padding: 2px;
+    box-sizing: border-box;
+    background: transparent;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.page_tool{
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    top: 0;
+    left: -25px;
+    /*border: 1px solid red;*/
+}
+.page_del{
+    width: 80%;
+    height: 26px;
+    background: url('./del.png') no-repeat;
+    background-size: 100%;
+}
+.page_liked{
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+    height: 18px;
+    background: url('./liked.png') no-repeat;
+    background-size: 100%;
+}
+</style>
+</html>
