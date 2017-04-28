@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <title></title>
+        <script src="https://unpkg.com/vue"></script>
+        <style>
+        html, body{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .page{
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        </style>
+    </head>
+    <body>
+        <div id="app" class="container">
+            <div class="page" v-for="(page, index) in pages" v-show="page.state" :style="{background: page.background}" :ref="'template' + index" @touchstart.stop="moveStart($event, index)">
+                {{index}}
+            </div>
+        </div>
+    </body>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                pages: [
+                    {
+                        background: '#'+Math.floor(Math.random()*16777215).toString(16),
+                        state: 1,
+
+                    },
+                    {
+                        background: '#'+Math.floor(Math.random()*16777215).toString(16),
+                        state: 0,
+
+                    },
+                    {
+                        background: '#'+Math.floor(Math.random()*16777215).toString(16),
+                        state: 0,
+
+                    },
+                    {
+                        background: '#'+Math.floor(Math.random()*16777215).toString(16),
+                        state: 0,
+
+                    }
+                ],
+                startY: '',
+                startT: '',
+                isMove: false,
+                isEnds: false,
+                index: 0,
+
+            },
+            methods: {
+                moveStart (event, index) {
+                    this.index = index
+                    this.startY = event.touches[0].pageY
+                    this.startT = new Date().getTime();
+                    document.addEventListener('touchmove', this.touchM)
+                    document.addEventListener('touchend', this.touchUp)
+                },
+                touchM (e) {
+                    let index = this.index
+                    this.isMove = true
+                    this.$refs['template' + index][0].style.zIndex = '2'
+                    this.$refs['template' + index][0].style.transition = null
+                    let deltaY = e.touches[0].pageY - this.startY;
+
+                    if (deltaY > 0) {
+                        if (this.pages[index - 1]) {
+                            this.isEnds = true
+                            this.$refs['template' + (index - 1)][0].style.zIndex = '0'
+                            this.pages[index - 1].state = 1
+                            if (this.pages[index + 1]) this.pages[index + 1].state = 0
+                            this.$refs['template' + index][0].style.transform = 'translateY(' + deltaY + 'px) perspective(800px) rotateX(30deg)'
+                        } else {
+                            this.isEnds = false
+                        }
+                    } else {
+                        if (this.pages[index + 1]) {
+                            this.isEnds = true
+                            this.$refs['template' + (index + 1)][0].style.zIndex = '0'
+                            this.pages[index + 1].state = 1
+                            if (this.pages[index - 1]) this.pages[index - 1].state = 0
+                            this.$refs['template' + index][0].style.transform = 'translateY(' + deltaY + 'px) perspective(800px) rotateX(-30deg)'
+                        } else {
+                            this.isEnds = false
+                        }
+
+                    }
+                },
+                touchUp (e) {
+                    // document.onmousemove = null
+                    document.removeEventListener('touchmove', this.touchM)
+                    let index = this.index
+                    let deltaT = new Date().getTime() - this.startT;
+                    let deltaY = e.changedTouches[0].pageY - this.startY;
+                    if (this.isMove) {
+                        if (this.$refs['template' + index]) this.$refs['template' + index][0].style.transition = 'transform 0.3s'
+                        if (deltaT < 300 && this.isEnds) {
+                            if (deltaY > 0) {
+                                this.$refs['template' + index][0].style.transform = 'translateY(100%) perspective(800px) rotateX(30deg)'
+                                setTimeout(() => {
+                                    this.pages[index].state = 0
+                                    this.$refs['template' + index][0].style.zIndex = '0'
+                                    this.$refs['template' + index][0].style.transform = 'translateY(0)'
+                                },300)
+                            }
+                            else if (deltaY < 0) {
+                                this.$refs['template' + index][0].style.transform = 'translateY(-100%) perspective(800px) rotateX(-30deg)'
+                                setTimeout(() => {
+                                    this.pages[index].state = 0
+                                    this.$refs['template' + index][0].style.zIndex = '0'
+                                    this.$refs['template' + index][0].style.transform = 'translateY(0)'
+                                },300)
+                            }
+                        }
+                        else if (deltaT > 300 && this.isEnds) {
+                            if (Math.abs(deltaY) / this.$refs['template' + index][0].clientHeight < 0.4) {
+                                this.$refs['template' + index][0].style.transform = 'translateY(0)'
+                            } else {
+                                if (deltaY > 0) {
+                                    this.$refs['template' + index][0].style.transform = 'translateY(100%)'
+                                    setTimeout(() => {
+                                        this.pages[index].state = 0
+                                        this.$refs['template' + index][0].style.zIndex = '0'
+                                        this.$refs['template' + index][0].style.transform = 'translateY(0)'
+                                    },300)
+
+                                } else {
+                                    this.$refs['template' + index][0].style.transform = 'translateY(-100%)'
+                                    setTimeout(() => {
+                                        this.pages[index].state = 0
+                                        this.$refs['template' + index][0].style.zIndex = '0'
+                                        this.$refs['template' + index][0].style.transform = 'translateY(0)'
+                                    },300)
+
+                                }
+                            }
+                        } else {
+                            this.$refs['template' + index][0].style.transform = 'translateY(0)'
+                        }
+                    }
+                    // document.onmouseup = null
+                    document.removeEventListener('touchend', this.touchUp)
+                }
+            }
+
+        })
+    </script>
+</html>
