@@ -24,15 +24,15 @@
             height: 100%;
             position: absolute;
             font-size: 28px;
-            text-align: center;
+            padding: 20px;
         }
 
         </style>
     </head>
     <body>
         <div id="app" class="container">
-            <div class="page" v-for="(page, index) in pages" v-show="page.state" :style="{background: page.background}" :ref="'template' + index" @touchstart.stop="moveStart($event, index)">
-                {{index}}
+            <div class="page" v-for="(page, index) in pages" v-show="page.state" :style="{background: page.background}" :ref="'template' + index" @touchstart.stop="moveStart($event, index)" v-html="page.text">
+
             </div>
         </div>
     </body>
@@ -44,21 +44,25 @@
                     {
                         background: '#'+Math.floor(Math.random()*16777215).toString(16),
                         state: 1,
+                        text: ''
 
                     },
                     {
                         background: '#'+Math.floor(Math.random()*16777215).toString(16),
                         state: 0,
+                        text: ''
 
                     },
                     {
                         background: '#'+Math.floor(Math.random()*16777215).toString(16),
                         state: 0,
+                        text: ''
 
                     },
                     {
                         background: '#'+Math.floor(Math.random()*16777215).toString(16),
                         state: 0,
+                        text: ''
 
                     }
                 ],
@@ -67,7 +71,12 @@
                 isMove: false,
                 isEnds: false,
                 index: 0,
+                msg: '',
 
+            },
+            mounted () {
+                let msgs = '产利君，我告诉你'
+                this.print(msgs, 0)
             },
             methods: {
                 moveStart (event, index) {
@@ -118,6 +127,7 @@
                         if (deltaT < 300 && this.isEnds) {
                             if (deltaY > 0) {
                                 this.$refs['template' + index][0].style.transform = 'translateY(100%) perspective(800px) rotateX(30deg)'
+                                if (index == 1) this.print('产利君，我告诉你', 0)
                                 setTimeout(() => {
                                     this.pages[index].state = 0
                                     this.$refs['template' + index][0].style.zIndex = '0'
@@ -126,6 +136,7 @@
                             }
                             else if (deltaY < 0) {
                                 this.$refs['template' + index][0].style.transform = 'translateY(-100%) perspective(800px) rotateX(-30deg)'
+                                if (index == 0) this.print('你是不是傻', 1)
                                 setTimeout(() => {
                                     this.pages[index].state = 0
                                     this.$refs['template' + index][0].style.zIndex = '0'
@@ -161,7 +172,19 @@
                     }
                     // document.onmouseup = null
                     document.removeEventListener('touchend', this.touchUp)
-                }
+                },
+                print (msgs, index) {
+                    var len = 0;
+                    var timer = setInterval(() => {
+                      this.pages[index].text = msgs.substring(0, len) + '_';
+                      if (len <= msgs.length) {
+                        len++;
+                      } else {
+                        clearInterval(timer)
+                        this.pages[index].text = msgs.substring(0, len)
+                      }
+                  }, 500)
+                },
             }
 
         })
