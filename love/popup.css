@@ -1,0 +1,31 @@
+#mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 30%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+}
+#dis{
+    
+    width: 80%;
+    font-size: 18px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 0 8px #999;
+    box-sizing: border-box;
+    margin: 100px auto;
+    border-radius: 100px;
+    
+}
+#time{
+    padding: 20px;
+    width: 80%;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0 0 8px #999;
+    box-sizing: border-box;
+    margin: auto;
+    border-radius: 100px;
+}

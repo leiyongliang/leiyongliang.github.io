@@ -1,0 +1,16 @@
+{
+    "name": "你看你看月亮的脸",  // 必要字段
+    "version": "1.0.0",  // 必要字段，规则：用1个到4个数字来表示，中间用点隔开，这些数字必须在0到65535之间，非零数字不能0开头
+    "manifest_version": 2, // 必要字段，必须为2，无引号
+    "description": "好想你能在我身边",  // 可选字段，插件描述信息
+    "author": "yoler",  // 可选字段，插件作者信息
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    }, // 必要字段，文件格式必须为"icons": {...}，不能为"icons": "icon.png"
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    } // 可选字段，指定默认显示页面
+}
