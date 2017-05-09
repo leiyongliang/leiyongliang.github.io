@@ -10,12 +10,13 @@
               font-family: Arial, "Microsoft YaHei"; 
           }
           .box {
-              width: 400px;
+              width: 480px;
               margin: 50px auto 0;
+              border: 1px solid red;
           }
           .puzzle-wrap {
-              width: 400px;
-              height: 400px;
+              width: 480px;
+              height: 480px;
               margin-bottom: 40px;
               padding: 0;
               background: #ccc;
@@ -24,8 +25,6 @@
           .puzzle {
               box-sizing: border-box;
               float: left;
-              width: 100px;
-              height: 100px;
               font-size: 20px;
               background: #f90;
               text-align: center;
@@ -35,6 +34,14 @@
               text-shadow: 1px 1px 1px #B9B4B4;
               cursor: pointer;
           }
+          .puzzle9{
+              width: 160px;
+              height: 160px;
+          }
+          .puzzle16{
+              width: 120px;
+              height: 120px;
+          }
           .puzzle-empty {
               background: #ccc;
               box-shadow: inset 2px 2px 18px;
@@ -42,19 +49,46 @@
           .btn-reset {
               box-shadow: inset 2px 2px 18px;
           }
+          .game_title{
+          	text-align: center;
+          	font-size: 18px;
+          }
+          .model{
+          	display: flex;
+            justify-content: space-between;
+            margin-top: 100px;
+          }
+          .model > div{
+              height: 30px;
+              background: skyblue;
+              border-radius: 4px;
+              width: 40%;
+              text-align: center;
+              line-height: 30px;
+              cursor: pointer;
+          }
     </style>
 </head>
 <body>
     <div class="box" id="app">
-        <ul class="puzzle-wrap">
+    <input type="file" v-show ='false' ref="file" @change="inputChange">
+    <div class="game_title">拼图游戏</div>
+    <div class="model" v-if="!start_game">
+    	<div @click="upload(9)">3*3模式</div>
+    	<div @click="upload(16)">4*4模式</div>
+    </div>
+    <div v-if='start_game'>
+    	<ul class="puzzle-wrap">
             <li 
-                :class="{'puzzle': true, 'puzzle-empty': !puzzle}" 
+                :class="{'puzzle': true, 'puzzle-empty': !puzzle, puzzle9: medel9, puzzle16: !medel9}" 
                 v-for="(puzzle, index) in puzzles" 
                 v-text="puzzle"
                 @click="moveFn(index)"
             ></li>
         </ul>
         <button class="btn btn-warning btn-block btn-reset" @click="render">重置游戏</button>
+    </div>
+        
     </div>
 </body>
 <script type="text/javascript">
@@ -63,18 +97,40 @@
       el: '#app',
       data: {
         puzzles: [],
+        start_game: false,
+        model: 9,
+        medel9: true,
       },
       mounted: function (){
-        console.log("reg")
-        this.render()
+        
+        
     },
       methods: {
+        upload: function(model){
+            this.$refs.file.click()
+            this.model = model
+            this.start_game = !this.start_game
+            if (model == 16) {
+                this.medel9 = false
+            } else {
+                this.medel9 = true
+            }
+            this.render()
+        },
+        inputChange () {
+            var file = this.$refs.file.files[0]
+            var oFReader = new FileReader()
+            oFReader.readAsDataURL(file);
+            oFReader.onload = function (oFREvent) {
+            document.getElementById("img_box").src = oFREvent.target.result;
+            };
+        },
         // 重置渲染
         render:function () {
             var puzzleArr = [],
                 i = 1
             // 生成包含1 ~ 15数字的数组
-            for (i; i < 16; i++) {
+            for (i; i < this.model; i++) {
                 puzzleArr.push(i)
             }
             // 随机打乱数组
