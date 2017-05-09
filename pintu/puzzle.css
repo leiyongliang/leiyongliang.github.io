@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ccc;
+    overflow: hidden;
+}
+/* input标签隐藏 */
+input[type="file"] {
+    visibility: hidden;
+}
+.main{
+    position: absolute;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    /*box-shadow: 1px 1px 5px #666, -1px -1px 5px #666;*/
+    background: #fff;
+    padding: 30px;
+    box-sizing: border-box;
+}
+.game_title{
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 24px;
+    /*background: #fff;*/
+    /*border-radius: 10px;
+    box-shadow: 1px 1px 5px #666, -1px -1px 5px #666;*/
+}
+.model{
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+.model_item{
+    width: 30%;
+    height: 100%;
+    background: #999;
+    color: #fff;
+    /*border: 1px solid #999;*/
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.active{
+    background: #ff7643;
+    color: #fff;
+}
+#btn {
+    margin: 100px auto 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .7s;
+    line-height: 60px;
+    text-align: center;
+}
+/* 游戏区域 */
+.performance{
+    height: 40px;
+    display: flex;
+    margin: 20px 0;
+    justify-content: space-between;
+}
+.performance > div {
+    height: 100%;
+    min-width: 30%;
+    line-height: 40px;
+    font-size: 18px;
+    background: #ff7643;
+    color: #fff;
+    border-radius: 6px;
+}
+.exit{
+    height: 40px;
+    width: 100%;
+    background: rgba(255, 0, 0, 0.8);
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#gameArea {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    margin-top:40px;
+    left: 100%;
+    transition: all .7s ease;
+    text-align: center;
+    z-index: -1;
+
+}
+/* 图片区域 */
+#imgArea {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+/* 每一个小方格*/
+#imgArea .imgCell {
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    border-radius: 4px;
+    position: absolute;
+    transition: left .4s ease-in-out, top .4s ease-in-out;
+}
+/* 游戏开始按钮 */
+#gameStart {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #fff;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+#gameStart:hover {
+    background-color: #449d44;
+    border-color: #398439;
+}

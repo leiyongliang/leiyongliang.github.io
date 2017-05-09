@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>puzzle</title>
+	<link rel="stylesheet" href="puzzle.css">
+</head>
+<body>
+	<!-- 获取图片 -->
+	<input type="file" id="file">
+	<div class="main" id="main">
+        <div class="game_title">
+            拼图游戏
+        </div>
+        <div class="model">
+            <div id="model_nine" onclick="model_select(this, 3)" class="model_item active">
+                9宫格模式
+            </div>
+            <div id="model_sixteen" onclick="model_select(this, 4)" class="model_item">
+                16宫格模式
+            </div>
+        </div>
+        <div id="btn">
+    		上传图片并开始游戏
+    	</div>
+	</div>
+
+
+	<div id="gameArea">
+		<!-- 游戏开始按钮 -->
+		<div id="gameStart">点击开始</div>
+
+        <div class="performance">
+            <div>用时：<span id="time">0</span></div>
+            <div>步数：<span id="step">0</span></div>
+        </div>
+		<div id="imgArea"></div>
+        <!-- 图片存放的区域 -->
+        <div class="exit" onclick="window.location.reload()">
+            退出游戏
+        </div>
+	</div>
+
+
+</body>
+	<script src="puzzle.js"></script>
+	<script>
+       var model_nine = document.getElementById('model_nine')
+       var model_sixteen = document.getElementById('model_sixteen')
+       function model_select (self, model) {
+           model_nine.classList.remove('active')
+           model_sixteen.classList.remove('active')
+           self.classList.add('active')
+           var puzzle = new Puzzle({
+               leverNow: model,
+               imgAreaSize: 400
+           });
+           puzzle.gameStart();
+       }
+       var puzzle = new Puzzle({
+           leverNow: 3,
+           imgAreaSize: 400
+       });
+       puzzle.gameStart();
+	</script>
+</html>
