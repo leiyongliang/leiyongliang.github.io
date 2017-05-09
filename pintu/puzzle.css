@@ -61,6 +61,7 @@ input[type="file"] {
     transition: all .7s;
     line-height: 60px;
     text-align: center;
+    box-shadow: 0 0 5px #999;
 }
 /* 游戏区域 */
 .performance{
