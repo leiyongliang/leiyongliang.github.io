@@ -1,8 +1,9 @@
-body {
+body,html {
     margin: 0;
     padding: 0;
     background-color: #ccc;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 /* input标签隐藏 */
 input[type="file"] {
@@ -10,12 +11,12 @@ input[type="file"] {
 }
 .main{
     position: absolute;
-    width: 400px;
+    width: 90%;
+    max-width:400px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    /*box-shadow: 1px 1px 5px #666, -1px -1px 5px #666;*/
     background: #fff;
     padding: 30px;
     box-sizing: border-box;
@@ -25,9 +26,6 @@ input[type="file"] {
     box-sizing: border-box;
     text-align: center;
     font-size: 24px;
-    /*background: #fff;*/
-    /*border-radius: 10px;
-    box-shadow: 1px 1px 5px #666, -1px -1px 5px #666;*/
 }
 .model{
     height: 50px;
@@ -36,11 +34,11 @@ input[type="file"] {
     margin-top: 100px;
 }
 .model_item{
+    min-width: 100px;
     width: 30%;
     height: 100%;
     background: #999;
     color: #fff;
-    /*border: 1px solid #999;*/
     font-size: 18px;
     text-align: center;
     line-height: 50px;
