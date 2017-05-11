@@ -49,15 +49,57 @@ input[type="file"] {
     background: #ff7643;
     color: #fff;
 }
-#btn {
-    margin: 100px auto 0;
+.history_score{
+    margin: 80px auto 0;
     width: 100%;
-    height: 60px;
-    background-color: #f4f4f4;
+    height: 50px;
+    background-color: #ff7643;
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+}
+.history_score_box{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
     border-radius: 10px;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow: auto;
+    display: none;
+    color: #fff;
+    font-size: 20px;
+}
+.history_score_item{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-family: fantasy;
+    font-style: italic;
+    color: #000;
+    margin-bottom: 20px;
+}
+#btn {
+    margin: 20px auto 0;
+    width: 100%;
+    height: 50px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
     cursor: pointer;
     transition: all .7s;
-    line-height: 60px;
+    line-height: 50px;
     text-align: center;
     box-shadow: 0 0 5px #999;
 }
@@ -87,6 +129,44 @@ input[type="file"] {
     line-height: 40px;
     border-radius: 8px;
     cursor: pointer;
+}
+.score_box{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 668px;
+    left: 0;
+    top: 0;
+    /*display: none;*/
+}
+.finished{
+    width: 100%;
+    margin: 50px 0;
+    font-size: 24px;
+    color: #ff7643;
+    text-align: center;
+}
+.score{
+    margin-top: 200px;
+    font-size: 24px;
+    line-height: 50px;
+    color: #dedede;
+}
+.score_ok{
+    background: #ff7643;
+    height: 40px;
+    width: 80%;
+    border-radius: 8px;
+    margin: 180px auto 0;
+    font-size: 24px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+#score{
+    font-family:fantasy;
+    color:  #ff7643;
+    font-size: 58px;
 }
 #gameArea {
     width: 400px;

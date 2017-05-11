@@ -6,7 +6,7 @@ var Puzzle = function(option){
 Puzzle.prototype = {
 
 	_init:function(option){
-
+		var _this = this
 		this.leverNow = option.leverNow <=2 ? 2 : option.leverNow || 2;
 
 		this.leverArr = [this.leverNow,this.leverNow];
@@ -16,8 +16,18 @@ Puzzle.prototype = {
 		this.imgRandomArr = [];
         this.stepnum = 0
 
+		this.seconds = null
+		this.minutes = null
+
 		this.btnObj = document.getElementById('btn');
         this.main = document.getElementById('main');
+
+		this.score_box = document.getElementById('score_box');
+		this.score = document.getElementById('score');
+		this.score_ok = document.getElementById('score_ok');
+		this.scoreNum = 0
+		this.history_score_box = document.getElementById('history_score_box');
+		this.history_score_btn = document.getElementById('history_score_btn');
 
 		this.inputObj = document.getElementById('file');
         this.time = document.getElementById('time');
@@ -54,8 +64,13 @@ Puzzle.prototype = {
 
 
 		this.imgUrl = '';
-	},
+		this.score_ok.onclick = this.score_ok_click()
+		this.history_score_btn.onclick = this.history_score_box_show()
+		this.history_score_box.onclick = function () {
+			_this.history_score_box.style.display = 'none'
+		}
 
+	},
 	gameStart:function(){
 
 		this.getImageUrl();
@@ -186,7 +201,36 @@ Puzzle.prototype = {
 			}
 		}
 	},
-
+	score_ok_click: function () {
+		var self = this
+		return function () {
+			self.score_box.style.display = 'none'
+			var scoreList = JSON.parse(localStorage.getItem('scoreList')) || []
+			scoreList.push(Math.round(self.scoreNum))
+			localStorage.setItem('scoreList', JSON.stringify(scoreList))
+		}
+	},
+	history_score_box_show: function() {
+		var self = this
+		return function () {
+			self.history_score_box.innerHTML = ''
+			self.history_score_box.style.display = 'block'
+			var scoreList = JSON.parse(localStorage.getItem('scoreList')) || []
+			var newscoreList = scoreList.sort(function(a, b) {
+				  return b - a;
+				})
+			if (scoreList.length) {
+				for (var i = 0; i < scoreList.length; i++) {
+					var div = document.createElement('div')
+					div.setAttribute('class', 'history_score_item')
+					div.innerHTML = '<div>' + (i + 1) + '</div><div>' + scoreList[i] +'</div>'
+					self.history_score_box.appendChild(div)
+				}
+			} else {
+				self.history_score_box.innerHTML = '暂时没有成绩记录，快去玩一局吧'
+			}
+		}
+	},
     timeStart: function() {
         var _self = this;
         var startT = new Date().getTime()
@@ -199,6 +243,8 @@ Puzzle.prototype = {
             var minutes=Math.floor(leave2/(60*1000))
             var leave3=leave2%(60*1000)
             var seconds=Math.round(leave3/1000)
+			_self.seconds = seconds
+			_self.minutes = minutes
             if (minutes) {
                 _self.time.innerHTML = minutes +'分 '+seconds+"秒"
             } else {
@@ -289,10 +335,22 @@ Puzzle.prototype = {
 	},
 
 	success:function(){
+		var _this = this
+		this.scoreNum = (6 * 10) / (this.minutes * 60 +  this.seconds) / this.stepnum * 1000
         clearInterval(this.timer)
 		this.hasStart = 0;
+		var scoreInit = 0
 		setTimeout(function(){
-			alert('恭喜完成游戏');
+			_this.score_box.style.display = 'block'
+			var score_timer = setInterval(function() {
+				if (scoreInit <= _this.scoreNum) {
+					_this.score.innerHTML = scoreInit
+					scoreInit += 1
+				} else {
+					clearInterval(score_timer)
+				}
+
+			}, 4)
 		},600);
 	}
 
