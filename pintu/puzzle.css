@@ -137,7 +137,7 @@ input[type="file"] {
     height: 668px;
     left: 0;
     top: 0;
-    /*display: none;*/
+    display: none;
 }
 .finished{
     width: 100%;
