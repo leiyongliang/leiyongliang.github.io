@@ -1,0 +1,311 @@
+body,html {
+    margin: 0;
+    padding: 0;
+    background-color: #ccc;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+/* input标签隐藏 */
+input[type="file"] {
+    visibility: hidden;
+}
+.main{
+    position: absolute;
+    width: 90%;
+    max-width:460px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background: #fff;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.game_title{
+    top: 26px;
+    position: absolute;
+    width: 80%;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 40px;
+    font-family:fantasy;
+    font-style: italic;
+    color: #ff7643;
+}
+.model{
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.model_item{
+    min-width: 100px;
+    width: 30%;
+    height: 100%;
+    background: #999;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.active{
+    background: #ff7643;
+    color: #fff;
+}
+.map{
+    margin: 100px 0 40px 0;
+    border: 1px solid #dedede;
+    padding: 0px 15px 30px 15px;
+    border-radius: 4px;
+}
+.map_title{
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #444;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0 0 20px 0;
+}
+.map_box{
+    width: 100%;
+    height: 180px;
+    display: flex;
+    justify-content: space-between;
+}
+.map-item{
+    width: 100px;
+    height: 180px;
+    padding: 2px;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.map-item:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.hz{
+    background: url('./hz1.jpg');
+    background-size:cover;
+}
+.xz{
+    background: url('./xz1.jpg');
+    background-size:cover;
+}
+.zjj{
+    background: url('./zjj1.jpg');
+    background-size:cover;
+}
+.pic{
+    height: 140px;
+    width: 100%;
+}
+.pic_name{
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+}
+.pic_box{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    transform: translateY(-100%);
+    transition: all .5s;
+
+}
+.pic_box p{
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+}
+.pic_item {
+    margin: auto;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.pic_item_f{
+    width: 180px;
+    height: 180px;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+.history_score{
+    position: absolute;
+    right: 30px;
+    top: 30px;;
+    width: 80px;
+    height: 35px;
+    /*background-color: #dedede;*/
+    box-shadow: 0 0 6px #888;
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 35px;
+    text-align: center;
+    color: #000;
+}
+
+.history_score_box{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow: auto;
+    display: none;
+    color: #fff;
+    font-size: 20px;
+}
+.history_score_item{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-family: fantasy;
+    font-style: italic;
+    color: #000;
+    margin-bottom: 20px;
+}
+.btn_start {
+    margin: 20px auto 0;
+    width: 100%;
+    height: 50px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .7s;
+    line-height: 50px;
+    text-align: center;
+    box-shadow: 0 0 5px #999;
+}
+/* 游戏区域 */
+.performance{
+    height: 40px;
+    display: flex;
+    margin: 20px 0;
+    justify-content: space-between;
+}
+.performance > div {
+    height: 100%;
+    min-width: 30%;
+    line-height: 40px;
+    font-size: 18px;
+    background: #ff7643;
+    color: #fff;
+    border-radius: 6px;
+}
+.exit{
+    height: 40px;
+    width: 100%;
+    background: rgba(255, 0, 0, 0.8);
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.score_box{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 668px;
+    left: 0;
+    top: 0;
+    display: none;
+}
+.finished{
+    width: 100%;
+    margin: 50px 0;
+    font-size: 24px;
+    color: #ff7643;
+    text-align: center;
+}
+.score{
+    margin-top: 200px;
+    font-size: 24px;
+    line-height: 50px;
+    color: #dedede;
+}
+.score_ok{
+    background: #ff7643;
+    height: 40px;
+    width: 80%;
+    border-radius: 8px;
+    margin: 180px auto 0;
+    font-size: 24px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+#score{
+    font-family:fantasy;
+    color:  #ff7643;
+    font-size: 58px;
+}
+#gameArea {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    margin-top:40px;
+    left: 100%;
+    transition: all .7s ease;
+    text-align: center;
+    z-index: -1;
+
+}
+/* 图片区域 */
+#imgArea {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+/* 每一个小方格*/
+#imgArea .imgCell {
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    border-radius: 4px;
+    position: absolute;
+    transition: left .4s ease-in-out, top .4s ease-in-out;
+}
+/* 游戏开始按钮 */
+#gameStart {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #fff;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+#gameStart:hover {
+    background-color: #449d44;
+    border-color: #398439;
+}
