@@ -133,19 +133,39 @@ Puzzle.prototype = {
 	},
 
 	showpic: function(type) {
-		var self = this
+		var _this2 = this;
+		var self = this;
 		this.pic_item.innerHTML = ''
 		this.pic_box.style.transform = 'translateY(0)'
-		for (let i = 0; i < this.piclist[type].length; i++) {
-			var div = document.createElement('div')
-			div.setAttribute('class', 'pic_item_f')
-			div.style.background = 'url(' + this.piclist[type][i] + ')'
-			div.style.backgroundSize = '100%'
+		// for (let i = 0; i < this.piclist[type].length; i++) {
+		// 	var div = document.createElement('div')
+		// 	div.setAttribute('class', 'pic_item_f')
+		// 	div.style.background = 'url(' + this.piclist[type][i] + ')'
+		// 	div.style.backgroundSize = '100%'
+		// 	div.onclick = function () {
+		// 		self.imgUrl = self.piclist[type][i]
+		// 		self.imgSplit()
+		// 	}
+		// 	this.pic_item.appendChild(div)
+		// }
+
+		var _loop = function _loop(i) {
+			div = document.createElement('div');
+
+			div.setAttribute('class', 'pic_item_f');
+			div.style.background = 'url(' + _this2.piclist[type][i] + ')';
+			div.style.backgroundSize = '100%';
 			div.onclick = function () {
-				self.imgUrl = self.piclist[type][i]
-				self.imgSplit()
-			}
-			this.pic_item.appendChild(div)
+				self.imgUrl = self.piclist[type][i];
+				self.imgSplit();
+			};
+			_this2.pic_item.appendChild(div);
+		};
+
+		for (var i = 0; i < this.piclist[type].length; i++) {
+			var div;
+
+			_loop(i);
 		}
 	},
 	// 切割图片
@@ -207,6 +227,7 @@ Puzzle.prototype = {
 	clickHandle:function(){
 
 		var _self = this;
+		_self.imgCells = Array.from(_self.imgCells)
 		return function(){
 			// 存储当前this
 			if(_self.hasStart == 0){
@@ -361,7 +382,8 @@ Puzzle.prototype = {
 		// 拿到当前的this
 		var _self = this;
 		// 遍历所有的小格子
-		this.imgCells.forEach(function(element,index){
+		var imgCells = Array.from(this.imgCells)
+		imgCells.forEach(function(element,index){
 			// 当前应该排列在第N个（从0开始...）
 			// 除以 一行小格子的个数 得到余数
 			// 这个余数就是当前应该处在第几列（从0开始算）
