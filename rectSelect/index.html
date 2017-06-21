@@ -101,16 +101,20 @@
 			document.onmouseup = function(){
 				document.onmousemove = null;
 				box.style.display = 'none';
+				box.style.top = 0;
+				box.style.left = 0;
+				box.style.width = 0;
+				box.style.height = 0;
 			}
 		}
 		
 		//点击文档取消选中的元素
-		/*document.addEventListener('click',function(ev){
-			for (var i = 0; i < box1.length; i++) {
-				box1[i].style.background = '';
-			}
-			ev.stopPropagation();
-		},false)*/
+		// document.addEventListener('click',function(ev){
+		// 	for (var i = 0; i < box1.length; i++) {
+		// 		box1[i].style.background = '';
+		// 	}
+		// 	ev.stopPropagation();
+		// },false)
 		
 		//封装获取盒模型详细信息
 		function getPos(obj){

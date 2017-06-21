@@ -11,8 +11,54 @@
 	<input type="file" id="file">
 	<div class="main" id="main">
         <div class="game_title">
-            拼图游戏
+            PUZZLE
         </div>
+		<div class="pic_box" id="pic_box">
+			<p>点击图片开始游戏</p>
+			<div class="pic_item" id="pic_item">
+				<div class="pic_item_f">
+
+				</div>
+				<div class="pic_item_f">
+
+				</div>
+			</div>
+		</div>
+		<div class="history_score" id="history_score_btn">
+			历史成绩
+		</div>
+		<div class="map">
+			<div class="map_title">
+				选择游戏地图
+			</div>
+			<div class="map_box">
+				<div class="map-item active_map" id="hz">
+					<div class="pic hz">
+
+					</div>
+					<div class="pic_name">
+						杭州西湖
+					</div>
+				</div>
+				<div class="map-item" id="xz">
+					<div class="pic xz">
+
+					</div>
+					<div class="pic_name">
+						西藏风光
+					</div>
+				</div>
+				<div class="map-item" id="zjj">
+					<div class="pic zjj">
+
+					</div>
+					<div class="pic_name">
+						张家界
+					</div>
+				</div>
+			</div>
+
+		</div>
         <div class="model">
             <div id="model_nine" onclick="model_select(this, 3)" class="model_item active">
                 9宫格模式
@@ -21,12 +67,13 @@
                 16宫格模式
             </div>
         </div>
-		<div class="history_score" id="history_score_btn">
-			历史成绩
-		</div>
+
 		<div class="history_score_box" id="history_score_box">
 		</div>
-        <div id="btn">
+		<!-- <div id="btn_init" class="btn_start">
+    		立即开始游戏
+    	</div> -->
+        <div id="btn" class="btn_start">
     		上传图片并开始游戏
     	</div>
         <p style="font-size: 14px; color: #777">注：图片尺寸最好为正方形</p>
@@ -62,7 +109,7 @@
 
 
 </body>
-	<script src="puzzle.min.js"></script>
+	<script src="puzzle.js"></script>
 	<script>
        var model_nine = document.getElementById('model_nine')
        var model_sixteen = document.getElementById('model_sixteen')

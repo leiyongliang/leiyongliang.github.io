@@ -1,4 +1,9 @@
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
 body{
     overflow: hidden;
 }
@@ -40,16 +45,21 @@ body{
     }
 </style>
 
+</head>
+<body>
+    <div id="polyline" style="transform: translate(20px,30px);">
+    <svg width="100%" height="100%" version="1.1"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+    <polygon fill="#000000" points="146.4,500 138.5,361.5 0,353.5 92.4,250 0,146.4 138.5,138.5 146.4,0 250,92.4 353.5,0 361.5,138.5 500,146.4 407.7,250 500,353.5 361.5,361.5 353.5,500 239,408.9"></polygon>
+    </svg>
+    <span id="resize1"></span>
+    <span id="resize2"></span>
+    <span id="resize3"></span>
+    <span id="resize4"></span>
+    </div>
+</body>
 
-<div id="polyline" style="transform: translate(20px,30px);">
-<svg width="100%" height="100%" version="1.1"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
-<polygon fill="#000000" points="146.4,500 138.5,361.5 0,353.5 92.4,250 0,146.4 138.5,138.5 146.4,0 250,92.4 353.5,0 361.5,138.5 500,146.4 407.7,250 500,353.5 361.5,361.5 353.5,500 239,408.9"></polygon>
-</svg>
-<span id="resize1"></span>
-<span id="resize2"></span>
-<span id="resize3"></span>
-<span id="resize4"></span>
-</div>
+
+
 <script>
 var polyline =  document.getElementById('polyline');
    var x,y,tx,ty;
@@ -160,3 +170,4 @@ Resize.prototype.fnup = function () {
 }
 </script>
 
+</html>

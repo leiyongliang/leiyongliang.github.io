@@ -12,7 +12,7 @@ input[type="file"] {
 .main{
     position: absolute;
     width: 90%;
-    max-width:400px;
+    max-width:460px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -20,18 +20,23 @@ input[type="file"] {
     background: #fff;
     padding: 30px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 .game_title{
-    width: 100%;
+    top: 26px;
+    position: absolute;
+    width: 80%;
     box-sizing: border-box;
     text-align: center;
-    font-size: 24px;
+    font-size: 40px;
+    font-family:fantasy;
+    font-style: italic;
+    color: #ff7643;
 }
 .model{
     height: 50px;
     display: flex;
     justify-content: space-between;
-    margin-top: 100px;
 }
 .model_item{
     min-width: 100px;
@@ -49,24 +54,116 @@ input[type="file"] {
     background: #ff7643;
     color: #fff;
 }
-.history_score{
-    margin: 80px auto 0;
+.map{
+    margin: 100px 0 40px 0;
+    border: 1px solid #dedede;
+    padding: 0px 15px 30px 15px;
+    border-radius: 4px;
+}
+.map_title{
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #444;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0 0 20px 0;
+}
+.map_box{
     width: 100%;
-    height: 50px;
-    background-color: #ff7643;
-    border-radius: 5px;
+    height: 180px;
+    display: flex;
+    justify-content: space-between;
+}
+.map-item{
+    width: 100px;
+    height: 180px;
+    padding: 2px;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.map-item:hover{
+    transform: scale(1.2);
     cursor: pointer;
-    line-height: 50px;
+}
+.hz{
+    background: url('./hz1.jpg');
+    background-size:cover;
+}
+.xz{
+    background: url('./xz1.jpg');
+    background-size:cover;
+}
+.zjj{
+    background: url('./zjj1.jpg');
+    background-size:cover;
+}
+.pic{
+    height: 140px;
+    width: 100%;
+}
+.pic_name{
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+}
+.pic_box{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    transform: translateY(-100%);
+    transition: all .5s;
+
+}
+.pic_box p{
+    font-size: 20px;
     text-align: center;
     color: #fff;
 }
+.pic_item {
+    margin: auto;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.pic_item_f{
+    width: 180px;
+    height: 180px;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+.history_score{
+    position: absolute;
+    right: 30px;
+    top: 30px;;
+    width: 80px;
+    height: 35px;
+    /*background-color: #dedede;*/
+    box-shadow: 0 0 6px #888;
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 35px;
+    text-align: center;
+    color: #000;
+}
+
 .history_score_box{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     padding: 30px;
     box-sizing: border-box;
@@ -91,7 +188,7 @@ input[type="file"] {
     color: #000;
     margin-bottom: 20px;
 }
-#btn {
+.btn_start {
     margin: 20px auto 0;
     width: 100%;
     height: 50px;
@@ -129,6 +226,7 @@ input[type="file"] {
     line-height: 40px;
     border-radius: 8px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 .score_box{
     position: absolute;
