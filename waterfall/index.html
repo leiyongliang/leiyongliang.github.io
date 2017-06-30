@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta charset='utf-8'>
+    	<meta name="keywords" content="雨天"/>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <title>Rainy Day</title>
+        <link rel="stylesheet" href="./style.css">
+        <script src="https://unpkg.com/vue"></script>
+    	<script src="https://cdn.bootcss.com/rainyday.js/0.1.2/rainyday.min.js"></script>
+    </head>
+    <body>
+        <div class="app" id="app">
+            <div class="container">
+                <div class="messboard" v-for="(item, index) in colors" :style="{background: item, height: (Math.random() + 1) * 300 + 'px'}">
+                    {{index}}
+                </div>
+            </div>
+
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                colors: ['#B39DDB', '#90CAF9', '#FF8A80', '#EA80FC', '#B39DDB', '#81D4FA', '#80DEEA', '#E6EE9C', '#C5E1A5', '#B9F6CA', '#BCAAA4', '#FFAB91', '#FFE082', '#689F38', '#FFC107']
+            },
+            mounted () {
+
+            }
+        })
+    </script>
+</html>
