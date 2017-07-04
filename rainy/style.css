@@ -12,6 +12,7 @@ body{
     width: 100%;
 }
 .container > img {
+    float: left;
 	height: 100%;
 	width: 100%;
 }
