@@ -22,12 +22,24 @@
                     </div>
                 </div>
             </div>
+            <div class="addBox" v-show="addBox">
+                <input type="text" name="title" placeholder="标题" v-model="title">
+                <textarea placeholder="内容" v-model="content"></textarea>
+                <div class="btn">
+                    <div class="confirm" @click="confirm">确定</div>
+                    <div class="cancel" @click="addBox = false">取消</div>
+                </div>
+            </div>
+            <div class="add" @click="add" v-show="!addBox">+</div>
         </div>
     </body>
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
+                title: '',
+                content: '',
+                addBox: false,
                 colors: ['#B39DDB', '#90CAF9', '#FF8A80', '#EA80FC', '#B39DDB', '#81D4FA', '#80DEEA', '#E6EE9C', '#C5E1A5', '#B9F6CA', '#BCAAA4', '#FFAB91', '#FFE082', '#689F38', '#FFC107'],
                 datas: [
                     {
@@ -47,6 +59,20 @@
             },
             mounted () {
 
+            },
+            methods: {
+                add () {
+                    this.addBox = true
+                },
+                confirm () {
+                    this.addBox = false
+                    var data = {
+                        title: this.title || '新建标题',
+                        content: this.content,
+                        time: new Date().toLocaleDateString() + '  ' + new Date().toLocaleTimeString()
+                    }
+                    this.datas.push(data)
+                }
             }
         })
     </script>
