@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta charset='utf-8'>
+    	<meta name="keywords" content="瞬念"/>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <title>瞬念</title>
+        <link rel="stylesheet" href="./style.css">
+        <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+        <div class="app" id="app">
+            <div class="container">
+                <div class="messboard" v-for="(item, index) in datas" :style="{background: colors[Math.round(Math.random()*colors.length)]}">
+                    <h3 class="title">{{item.title}}</h3>
+                    <div class="content">
+                        {{item.content}}
+                    </div>
+                    <div class="time">
+                        {{item.time}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                colors: ['#B39DDB', '#90CAF9', '#FF8A80', '#EA80FC', '#B39DDB', '#81D4FA', '#80DEEA', '#E6EE9C', '#C5E1A5', '#B9F6CA', '#BCAAA4', '#FFAB91', '#FFE082', '#689F38', '#FFC107'],
+                datas: [
+                    {
+                        title: '什么是瞬念',
+                        content: '这是一个交流心情的地方，当我们卸下一身疲惫，躺在床上，难免思绪万千，静静的听着雨声，看着水珠一滴滴从窗上落下，此刻，你在想些什么，你在思念谁？',
+                        time: new Date().toLocaleDateString() + '  ' + new Date().toLocaleTimeString()
+                    },
+                    {
+                        title: '东京地震8.0',
+                        content: '昨晚看完了同事推荐的东京地震8.0这部番剧，感受颇深。我们在讨厌这个世界的时候，我们没有想过其实它有多美好，一切风平浪静，有秩序的进行着，所以不是这个世界不好，而是我们心态有问题，\
+                        	为什么在经历一场大灾难之后我们会更加珍惜幸存的人，在经历一场大病之后会更加珍惜自己的身体，以前的放纵，不懂事，皆因活在自我中，这也是不成熟的表现。我经常感叹人生，所谓人生，只不过\
+                        	是一根有思想的芦苇从一颗种子到最后枯萎的过程，不要想我来到这个世界有什么意义，来的不止你一个，万千世界的花花草草也来到了这个世界，我们要明白，存在着便好好珍惜，就像猫儿喜欢阳光，蜜粉喜欢采蜜，多做一些自己喜欢的事，快乐最重要。',
+                        time: '2017/7/4'
+                    },
+                    
+                ]
+            },
+            mounted () {
+
+            }
+        })
+    </script>
+</html>
