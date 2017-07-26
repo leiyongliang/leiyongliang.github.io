@@ -1,0 +1,165 @@
+<!--<script src="https://cdn.bootcss.com/vue/2.3.3/vue.min.js"></script>-->
+<script src="./guideline.js"></script>
+<script src="./guidelineagent.js"></script>
+
+<style>
+    .vertical-line,
+    .horizontal-line {
+        position: absolute;
+        z-index: 3;
+        background: red;
+        /*visibility: hidden;*/
+        display: none;
+    }
+
+    .draggable-element {
+        position: absolute;
+    }
+</style>
+
+<button onclick="adddiv()">add</button>
+
+<body>
+    <div id="container" style="position:absolute; z-index:1; left:400px; top:100px; width:489px; height:782.4px; background:white; border-style:solid; border-width:1px; border-color:#000">
+        <!--<div class="vertical-line" style="top: -1px; width: 0px; height: 782.4px; left: 244.5px"></div>
+        <div class="horizontal-line" style="left: -1px; width: 489px; height: 0px; top: 685.259px"></div>-->
+    </div>
+</body>
+
+<script>
+    i = 0
+    ok = false
+
+    onmousedown = ev => {
+        if (ev.target.className == 'draggable-element') {
+            ok = true
+            g_target = ev.target
+
+            let width = parseFloat(ev.target.style.width)
+            let height = parseFloat(ev.target.style.height)
+            let top = g_offsetTop = parseFloat(ev.target.style.top)
+            let midHeight = top + height / 2
+            let bottom = top + height
+            let left = g_offsetLeft = parseFloat(ev.target.style.left)
+            let midWidth = left + width / 2
+            let right = left + width
+            gl.deleteLines([top, midHeight, bottom], [left, midWidth, right])
+        }
+    }
+
+    onmousemove = ev => {
+        if (ok) {
+            g_offsetTop += ev.movementY
+            g_offsetLeft += ev.movementX
+            let top = g_offsetTop
+            let left = g_offsetLeft
+            let width = parseFloat(g_target.style.width)
+            let height = parseFloat(g_target.style.height)
+            let midHeight = top + height / 2
+            let bottom = top + height
+            let midWidth = left + width / 2
+            let right = left + width
+
+            let r = gl.adsorbHorizontal([top, midHeight, bottom])
+            if (r) {
+                switch (r.key) {
+                    case '0':
+                        top = parseFloat(r.h)
+                        midHeight = top + height / 2
+                        bottom = top + height
+                        break;
+                    case '1':
+                        midHeight = parseFloat(r.h)
+                        top = midHeight - height / 2
+                        bottom = midHeight + height / 2
+                        break;
+                    case '2':
+                        bottom = parseFloat(r.h)
+                        midHeight = bottom - height / 2
+                        top = bottom - height
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            r = gl.adsorbVertical([left, midWidth, right])
+            if (r) {
+                switch (r.key) {
+                    case '0':
+                        left = parseFloat(r.v)
+                        midWidth = left + width / 2
+                        right = left + width
+                        break;
+                    case '1':
+                        midWidth = parseFloat(r.v)
+                        left = midWidth - width / 2
+                        right = midWidth + width / 2
+                        break;
+                    case '2':
+                        right = parseFloat(r.v)
+                        midWidth = right - width / 2
+                        left = right - width
+                        break;
+
+                    default:
+                        break;
+                }
+                // console.log(top, midHeight, bottom, left, midWidth, right)
+            }
+
+            g_target.style.top = top
+            g_target.style.left = left
+
+            gl.match([top, midHeight, bottom], [left, midWidth, right])
+        }
+    }
+
+    onmouseup = ev => {
+        if (ok) {
+            ok = false
+
+            // 添加新的参考线
+            let width = parseFloat(g_target.style.width)
+            let height = parseFloat(g_target.style.height)
+            let top = parseFloat(g_target.style.top)
+            let midHeight = top + height / 2
+            let bottom = top + height
+            let left = parseFloat(g_target.style.left)
+            let midWidth = left + width / 2
+            let right = left + width
+
+            // console.log(top, midHeight, bottom, left, midWidth, right)
+            gl.addLines([top, midHeight, bottom], [left, midWidth, right])
+            gl.hideLines()
+        }
+    }
+
+    function adddiv() {
+        let top = 11.1
+        let left = 55.5
+        let width = 100
+        let height = 100
+        let midWidth = left + width / 2
+        let midHeight = top + height / 2
+        let bottom = top + height
+        let right = left + width
+
+        let div = document.createElement('div')
+        div.id = ++i
+        div.setAttribute('class', 'draggable-element')
+        div.style.width = width
+        div.style.height = height
+        div.style.left = left
+        div.style.top = top
+        div.style.background = 'red'
+
+        document.getElementById('container').appendChild(div)
+
+        // console.log(top, midHeight, bottom, left, midWidth, right)
+        gl.addLines([top, midHeight, bottom], [left, midWidth, right])
+    }
+
+    let gl = new GuideLine('container')
+</script>
