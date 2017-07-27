@@ -52,12 +52,12 @@ body{
         width: 0;
         height: 20px;
         margin-left: -1px;
-        border-left:1px dashed red; 
+        border-left:1px dashed red;
     }
 </style>
 
 
-<div id="polyline" style="transform: translate(20px,30px);">
+<div id="polyline">
 <svg width="100%" height="100%" version="1.1"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
 <polygon fill="#000000" points="146.4,500 138.5,361.5 0,353.5 92.4,250 0,146.4 138.5,138.5 146.4,0 250,92.4 353.5,0 361.5,138.5 500,146.4 407.7,250 500,353.5 361.5,361.5 353.5,500 239,408.9"></polygon>
 </svg>
@@ -69,17 +69,13 @@ body{
 </div>
 <script>
 var polyline =  document.getElementById('polyline');
-   var x,y,tx,ty;
+   var x, y, t, l;
 window.onload = function () {
    polyline.addEventListener('mousedown',function(event) {
-        // x = event.clientX-this.offsetLeft;
-        // y = event.clientY-this.offsetTop;
-        
         x = event.clientX;
         y = event.clientY;
-        tx = this.style.transform.match(/[-]?\d+/)[0];
-        ty = this.style.transform.match(/, ([-]?\d+)/)[1];
-        
+        t = polyline.offsetTop;
+        l = polyline.offsetLeft;
         polyline.addEventListener('mousemove',move)
     })
     polyline.addEventListener('mouseup',function(){
@@ -91,15 +87,14 @@ window.onload = function () {
     var rz3 = new Resize('resize3', 3);
     var rz4 = new Resize('resize4', 4);
     var ro = new Resize('rotate', 5);
-   
+
 }
 function move(event) {
     var disx = event.clientX - x;
     var disy = event.clientY - y;
-    var mx = parseInt(tx) + parseInt(disx),my = parseInt(ty) + parseInt(disy);
-    this.style.transform = 'translate('+ mx + 'px,' + my + 'px)';
-    // this.style.left = event.clientX - x + 'px';
-    // this.style.top = event.clientY - y + 'px';
+    var top = parseInt(t) + parseInt(disy), left = parseInt(l) + parseInt(disx);
+    polyline.style.top = top + 'px';
+    polyline.style.left = left + 'px';
 }
 
 function Resize(id, dir) {
@@ -110,9 +105,11 @@ function Resize(id, dir) {
     this.clickY = 0;
     this.width = 0;
     this.height = 0;
+    this.top = 0;
+    this.left = 0;
     this.dir = dir;
-    this.tx = 0;
-    this.ty = 0;
+    this.centery
+    this.centerx
     var _this = this;
 
     this.dom.onmousedown = function(e) {
@@ -126,10 +123,12 @@ Resize.prototype.fndown = function(e) {
     this.clickY = e.clientY;
     this.width = polyline.clientWidth;
     this.height = polyline.clientHeight;
-    this.tx = polyline.style.transform.match(/[-]?\d+/)[0];
-    this.ty = polyline.style.transform.match(/, ([-]?\d+)/)[1];
+    this.top = polyline.offsetTop;
+    this.left = polyline.offsetLeft;
+    this.centery = this.top + this.height / 2
+    this.centerx = this.left + this.width  / 2
     var _this = this;
-    
+
 
     document.onmousemove = function (e) {
         _this.fnmove(e);
@@ -143,20 +142,20 @@ Resize.prototype.fndown = function(e) {
 Resize.prototype.fnmove = function (e)  {
     this.disX = e.clientX - this.clickX;
     this.disY = e.clientY - this.clickY;
+    var left = parseInt(this.left)
+    var top = parseInt(this.top)
     if (this.dir == 1) {
+        console.log(this.left)
         polyline.style.width = this.width - this.disX + 'px';
         polyline.style.height = this.height - this.disX + 'px';
-
-        var mx = parseInt(this.tx) + parseInt(this.disX),my = parseInt(this.ty) + parseInt(this.disX);
-        polyline.style.transform = 'translate('+ mx + 'px,' + my + 'px)';
-
+        left = parseInt(this.left) + parseInt(this.disX);
+        top = parseInt(this.top) + parseInt(this.disX);
     }
     else if (this.dir == 2) {
         polyline.style.width = this.width + this.disX + 'px';
         polyline.style.height = this.height + this.disX + 'px';
+        top -= parseInt(this.disX);
 
-        var mx = parseInt(this.tx),my = parseInt(this.ty) - parseInt(this.disX);
-        polyline.style.transform = 'translate('+ mx + 'px,' + my + 'px)';
     }
     else if (this.dir == 3) {
         polyline.style.width = this.width + this.disX + 'px';
@@ -166,13 +165,41 @@ Resize.prototype.fnmove = function (e)  {
         polyline.style.width = this.width - this.disX + 'px';
         polyline.style.height = this.height - this.disX + 'px';
 
-        var mx = parseInt(this.tx) + parseInt(this.disX),my = parseInt(this.ty);
-        polyline.style.transform = 'translate('+ mx + 'px,' + my + 'px)';
+        left += parseInt(this.disX)
     }
+
     else if (this.dir == 5) {
-        polyline.style.transform = 'translate('+ this.tx + 'px,' + this.ty + 'px) rotateZ('+-this.disX+'deg)';
+        var radian = Math.atan2(event.pageY - this.centery, event.pageX - this.centerx)
+        var angle = Math.floor((radian) * 180 / Math.PI) - 90
+        angle = angle < 0 ? angle+ 360 : angle
+       if (angle > 42 && angle < 48) {
+           angle = 45
+       }
+       else if (angle > 87 && angle < 93) {
+           angle = 90
+       }
+       else if (angle > 132 && angle < 138) {
+           angle = 135
+       }
+       else if (angle > 177 && angle < 183) {
+           angle = 180
+       }
+       else if (angle > 222 && angle < 228) {
+           angle = 225
+       }
+       else if (angle > 267 && angle < 273) {
+           angle = 270
+       }
+       else if (angle > 312 && angle < 318) {
+           angle = 315
+       }
+       else if (angle > 357 || angle < 3) {
+           angle = 0
+       }
+        polyline.style.transform = 'rotateZ('+ angle +'deg)';
     }
-    
+    polyline.style.top = top + 'px';
+    polyline.style.left = left + 'px';
 }
 
 Resize.prototype.fnup = function () {
@@ -180,4 +207,3 @@ Resize.prototype.fnup = function () {
     document.onmouseup = null;
 }
 </script>
-

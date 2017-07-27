@@ -45,7 +45,7 @@
 	<script type="text/javascript">
 		var box = document.querySelector('.box');
 		var box1 = document.querySelectorAll('.box1');
-		
+
 		document.onmousedown = function(ev){
 			var disx = ev.clientX; //鼠标起始点坐标
 			var disy = ev.clientY;
@@ -54,39 +54,39 @@
 				//右下拖
 				if (ev.clientX > disx && ev.clientY > disy) {  //目前按下的坐标X与Y都大于 开始的坐标
 					console.log('右下拖')
-					box.style.left = disx + 'px'; 
+					box.style.left = disx + 'px';
 					box.style.top = disy + 'px';
 					box.style.width = ev.clientX - disx + 'px';
 					box.style.height = ev.clientY - disy + 'px';
 				}
-				
+
 				//右上拖
 				if (ev.clientX > disx && ev.clientY < disy) {
 					console.log('右上拖')
-					box.style.left = disx + 'px'; 
+					box.style.left = disx + 'px';
 					box.style.top = ev.clientY + 'px';
 					box.style.width = ev.clientX - disx + 'px';
 					box.style.height = disy- ev.clientY + 'px';
 				}
-				
+
 				//右下拖
 				if (ev.clientX < disx && ev.clientY > disy) {
 					console.log('右上拖')
-					box.style.left = ev.clientX + 'px'; 
+					box.style.left = ev.clientX + 'px';
 					box.style.top = disy + 'px';
 					box.style.width = disx-ev.clientX + 'px';
 					box.style.height = ev.clientY-disy + 'px';
 				}
-				
+
 				//左上
 				if (ev.clientX < disx && ev.clientY < disy) {
 					console.log('右上拖')
-					box.style.left = ev.clientX + 'px'; 
+					box.style.left = ev.clientX + 'px';
 					box.style.top = ev.clientY + 'px';
 					box.style.width = disx-ev.clientX + 'px';
 					box.style.height = disy- ev.clientY + 'px';
 				}
-				
+
 				//框选元素
 				for (var i = 0; i < box1.length; i++) {
 					if(getPos(box).right < getPos(box1[i]).left || getPos(box).top > getPos(box1[i]).bottom || getPos(box).bottom < getPos(box1[i]).top || getPos(box).left > getPos(box1[i]).right){
@@ -107,15 +107,14 @@
 				box.style.height = 0;
 			}
 		}
-		
-		//点击文档取消选中的元素
-		// document.addEventListener('click',function(ev){
-		// 	for (var i = 0; i < box1.length; i++) {
-		// 		box1[i].style.background = '';
-		// 	}
-		// 	ev.stopPropagation();
-		// },false)
-		
+
+		document.addEventListener('click',function(ev){
+			for (var i = 0; i < box1.length; i++) {
+				box1[i].style.background = '';
+			}
+			ev.stopPropagation();
+		},false)
+
 		//封装获取盒模型详细信息
 		function getPos(obj){
 			return obj.getBoundingClientRect();
