@@ -66,10 +66,16 @@
   var showkeycode = document.querySelector('.showkeycode')
   var showkey = document.querySelector('.showkey span')
   function keyD (event) {
+    console.log(event)
     document.querySelector('.init').style.display = 'none'
     showkeycode.innerHTML = event.keyCode
     showkeycode.classList.add('playing')
-    showkey.innerHTML = event.code || event.key
+    if (event.code || event.key) {
+        showkey.innerHTML = event.code || event.key
+    } else {
+      showkey.innerHTML = '这个浏览器我很鄙视它'
+    }
+    
   }
 </script>
 </html>
