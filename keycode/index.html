@@ -69,7 +69,7 @@
     document.querySelector('.init').style.display = 'none'
     showkeycode.innerHTML = event.keyCode
     showkeycode.classList.add('playing')
-    showkey.innerHTML = event.code
+    showkey.innerHTML = event.code || event.key
   }
 </script>
 </html>
