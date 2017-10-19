@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>KeyCode</title>
+    <style type="text/css">
+      body{
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+      .init{
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        font-size: 24px;
+      }
+      .showkeycode{
+        width: 100%;
+        height: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 200px;
+      }
+      .showkey{
+        height: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+      }
+      .showkey span{
+        display: inline-block;
+
+        padding: 10px 25px;
+        background: #dedede;
+        border-radius: 4px;
+        text-align: center;
+        font-size: 24px;
+      }
+    </style>
+</head>
+<body>
+   <div class="init">请按键任意键</div>
+    <div class="showkeycode"></div>
+    <div class="showkey">
+      <span></span>
+    </div>
+</body>
+<script type="text/javascript">
+  window.addEventListener('keydown', keyD)
+  var showkeycode = document.querySelector('.showkeycode')
+  var showkey = document.querySelector('.showkey span')
+  function keyD (event) {
+    console.log(event)
+    document.querySelector('.init').style.display = 'none'
+    showkeycode.innerHTML = event.keyCode
+    showkeycode.classList.add('playing')
+    if (event.code || event.key) {
+        showkey.innerHTML = event.code || event.key
+    } else {
+      showkey.innerHTML = '这个浏览器我很鄙视它'
+    }
+    
+  }
+</script>
+</html>
