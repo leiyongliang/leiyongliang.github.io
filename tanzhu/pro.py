@@ -29,7 +29,7 @@ def play_ball():
 
     ball_image = pygame.image.load('ball.png')
 
-    ball_rect = ball_image.get_rect()
+    ball_circle  = ball_image.get_rect()
 
     frames_per_sec = 50
     fps_clock = pygame.time.Clock()
@@ -41,16 +41,16 @@ def play_ball():
                 pygame.quit()
                 sys.exit()
 
-        ball_rect =  ball_rect.move(speed)
+        ball_circle  =  ball_circle .move(speed)
 
-        if (ball_rect.left < 0) or (ball_rect.right > width):
+        if (ball_circle .left < 0) or (ball_circle .right > width):
             speed[0] =- speed[0]
 
-        if (ball_rect.top < 0) or (ball_rect.bottom > height):
+        if (ball_circle .top < 0) or (ball_circle .bottom > height):
             speed[1] =- speed[1]
         screen.fill(color_balck)
 
-        screen.blit(ball_image, ball_rect)
+        screen.blit(ball_image, ball_circle )
 
         pygame.display.update()
 
@@ -73,10 +73,10 @@ def control(event):
     speed_offset = 1
 
     if event.type  == pygame.KEYDOWN:
-        if event.key == pygame.K_LEFT:
-            speed[0] -= speed_offset
-        if event.key == pygame.K_RIGHT:
-            speed[0] = speed_offset
+        # if event.key == pygame.K_LEFT:
+        #     speed[0] -= speed_offset
+        # if event.key == pygame.K_RIGHT:
+        #     speed[0] = speed_offset
         if event.key == pygame.K_UP:
             speed[1] -= speed_offset
         if event.key == pygame.K_DOWN:
@@ -87,16 +87,20 @@ def control(event):
 
 def play_ball_control():
     pygame.init()
+    WHITE = [255, 255, 255]
     ball_speed = [1, 1]
-    window_size = Rect(0, 0, 700, 500)
+    window_size = Rect(0, 0, 900, 500)
     (width, height) = window_size.size
     screen = pygame.display.set_mode(window_size.size)
     pygame.display.set_caption('控制_ball')
 
-    ball_image = load_image('ball.png')
+    # ball_image = load_image('ball.png')
 
-    ball_rect = ball_image.get_rect()
-    my_rect = pygame.Rect(100, 450, 100, 10)
+    # ball_circle  = ball_image.get_rect()
+    my_rect = pygame.Rect(10, 250, 10, 100)
+    ball_circle = pygame.Rect(450, 200, 20, 20)
+    #统计分数
+    score=0
 
     frames_per_sec = 50
     fps_clock = pygame.time.Clock()
@@ -107,27 +111,44 @@ def play_ball_control():
                 pygame.quit()
                 sys.exit()
         delay = delay + 1
-        if (delay % 5 == 0):
-            ball_rect = ball_rect.move(ball_speed)
         cur_speed = control(event)
         my_rect = my_rect.move(cur_speed).clamp(window_size)
-        if (ball_rect.left < 0) or (ball_rect.right > width):
+        if (delay % 1 == 0):
+        	ball_circle = ball_circle.move(ball_speed)
+        	if (ball_circle .left < my_rect.right + 20):
+	        	if (ball_circle .top > my_rect.top) and (ball_circle .bottom < my_rect.bottom):
+	        		score += 1
+        
+        if (ball_circle .right > width):
             ball_speed[0] =- ball_speed[0]
+        if (ball_circle .left < my_rect.right + 20):
+        	if (ball_circle .top > my_rect.top) and (ball_circle .bottom < my_rect.bottom):
+        		ball_speed[0] =- ball_speed[0]
 
-        if (ball_rect.top < 0) or (ball_rect.bottom > height):
-            ball_speed[1] =- ball_speed[1]
+        if (ball_circle .top < 20) or (ball_circle .bottom > height):
+        	ball_speed[1] =- ball_speed[1]
+
+        if ball_circle .left < 20:
+        	show_text(screen, (340, 240), 'Game Over', (0, 0, 255), True, 24, True)
+        	pygame.quit()
         screen.fill((0, 0, 0))
-        pygame.draw.rect(screen,[255,0,0],my_rect,0)
-        screen.blit(ball_image, ball_rect)
+        
+        circle = pygame.draw.circle(screen, WHITE, ball_circle.topleft, 20)
+        pygame.draw.line(screen, WHITE, (450, 0), (450, 500), 1)
+        pygame.draw.rect(screen, WHITE, my_rect, 0)
+        # screen.blit(ball_image, ball_circle )
 
         text_time = u"时间:%s" % time.strftime("%H:%M:%S", time.gmtime())
-        show_text(screen, (20, 400), text_time, (0, 255, 0), True)
+        show_text(screen, (20, 400), text_time, WHITE, True)
 
-        text_pos = u"小球位置:(%d,%d)" % (my_rect.left, my_rect.top)
-        show_text(screen, (20, 420), text_pos, (0, 255, 255), True)
+        text_pos = u"小球位置:(%d,%d)" % (ball_circle .left, ball_circle.top)
+        show_text(screen, (20, 420), text_pos, WHITE, True, 20, True)
 
         author_info = u"作者:yoler"
-        show_text(screen, (20, 440), author_info, (0, 0, 255), True, 13, True)
+        show_text(screen, (20, 440), author_info, WHITE, True, 13, True)
+
+        text_score='Score:%s'%str(score)
+        show_text(screen, (10, 5), text_score, WHITE, True, 18, True)
 
         pygame.display.update()
 
