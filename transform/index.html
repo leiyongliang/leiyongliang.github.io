@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>图形移动</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<style type="text/css">
+		html, body{
+			height: 100%;
+			padding: 0;
+			margin: 0;
+		}
+		.demo{
+			position: absolute;
+			border: 1px dashed #222;
+			background: #fff222;
+			cursor: move;
+		}
+		.operation{
+			position: absolute;
+			z-index: 1001;
+			display: block;
+			width: 16px;
+			height: 16px;
+			border-radius: 16px;
+			text-decoration: none;
+			pointer-events: painted;
+		}
+		.operation::before{
+			position: absolute;
+		    content: '';
+		    background: #3f4652;
+		    width: 10px;
+		    height: 10px;
+		    left: 0;
+		    top: 0;
+		    border: 2px solid #fff;
+		    border-radius: 10px;
+		    transition: background .15s linear;
+		    box-shadow: 0 0 3px 1px rgba(0,0,0,.15);
+		}
+		.tl{
+			left: -7px;
+			top: -7px;
+			cursor: nwse-resize;
+		}
+		.tr{
+			right: -8px;
+		    top: -8px;
+			cursor: nesw-resize;
+		}
+		.br{
+			right: -8px;
+		    bottom: -8px;
+			cursor: nwse-resize;
+		}
+		.bl{
+			left: -8px;
+		    bottom: -8px;
+			cursor: nesw-resize;
+		}
+		.rotate{
+			position: absolute;
+		    left: 50%;
+		    top: 100%;
+		    z-index: 1000;
+			width: 16px;
+		    height: 16px;
+		    margin: 20px 0 0 -8px;
+		    border-radius: 14px;
+			cursor: pointer;
+			pointer-events: painted;
+		}
+		.rotate::before{
+			content: '';
+		    position: absolute;
+		    left: 50%;
+		    top: -20px;
+		    width: 0;
+		    height: 30px;
+		    margin-left: -1px;
+		    border-left: 1px dashed #3f4652;
+		    background-color: #fff;
+		}
+		.rotate::after{
+			content: '';
+		    background-color: #fff;
+		    background-position: 1px 2px;
+		    position: absolute;
+			left: 0;
+		    top: 0;
+		    width: 16px;
+		    height: 16px;
+		    border-radius: 16px;
+		    box-shadow: 0 0 3px 1px rgba(0,0,0,.15);
+		}
+		.degrees{
+			position: absolute;
+			top: 30px;
+			left: -32px;
+			width: 80px;
+		    height: 16px;
+			text-align: center;
+			color: #777;
+			font-size: 13px;
+		}
+		.rotation{
+			position: absolute;
+			width: 16px;
+		    height: 16px;
+		    margin: -10px 0 0 -10px;
+		    border: 2px solid rgba(0,0,0,.2);
+		    background: rgba(255,255,255,.2);
+		    border-radius: 16px;
+			left: 50%;
+		    top: 50%;
+		    z-index: 1002;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div class="demo" :style="{
+			width: width + 'px',
+			height: height + 'px',
+			top: top + 'px',
+			left: left + 'px',
+			transform: `rotate(${rotate}deg)`
+		}"
+		@mousedown.stop="moveStart($event)"
+		>
+			<span class="operation tl" @mouseover="resizeDir($event, 'tl')" @mousedown.stop="resize($event, 'tl')"></span>
+			<span class="operation tr" @mouseover="resizeDir($event, 'tr')" @mousedown.stop="resize($event, 'tr')"></span>
+			<span class="operation bl" @mouseover="resizeDir($event, 'bl')" @mousedown.stop="resize($event, 'bl')"></span>
+			<span class="operation br" @mouseover="resizeDir($event, 'br')" @mousedown.stop="resize($event, 'br')"></span>
+			<span class="rotate" @mousedown.stop="resize($event, 'rotate')">
+				<span class="degrees" v-if="isDegrees" :style="{
+					transform: `rotateZ(${-rotate}deg)`,
+				}">{{rotate}}°</span>
+			</span>
+			<div class="rotation" v-if="isDegrees"></div>
+		</div>
+	</div>
+</body>
+
+<script>
+	var Vm = new Vue({
+		el: '#app',
+		data: {
+			width: 200,
+			height: 200,
+			top: 50,
+			left: 50,
+			rotate: 0,
+			init: {
+				x: 0,
+				y: 0,
+				top: 0,
+				left: 0,
+				width: 0,
+				height: 0,
+				rotate: 0,
+				TL: '',
+				aspectRatio: '',
+				centerY: '',
+				centerX: ''
+			},
+			isDegrees: false
+		},
+		methods: {
+			moveStart (event) {
+				this.init.x = event.clientX
+				this.init.y = event.clientY
+				this.init.top = this.top
+				this.init.left = this.left
+				this.init.width = this.width
+				this.init.height = this.height
+
+				document.onmousemove = (event) => {
+					this.move(event)
+				}
+
+				document.onmouseup = () => {
+					document.onmousemove = null
+					document.onmouseup = null
+				}
+			},
+
+			move (event) {
+				let disx = event.clientX - this.init.x
+				let disy = event.clientY - this.init.y
+
+				this.top = this.init.top + disy
+				this.left = this.init.left + disx
+			},
+
+			resize (event, type) {
+				event.stopPropagation()
+				this.init.x = event.clientX
+				this.init.y = event.clientY
+				this.init.top = this.top
+				this.init.left = this.left
+				this.init.width = this.width
+				this.init.height = this.height
+				this.init.rotate = this.rotate
+				this.init.aspectRatio = this.width / this.height
+				this.init.centerX = event.clientX + (this.height / 2 + 30) * Math.sin(this.init.rotate * Math.PI / 180)
+				this.init.centerY = event.clientY - (this.height / 2 + 30) * Math.cos(this.init.rotate * Math.PI / 180)
+
+				if (type === 'rotate') {
+					this.isDegrees = true
+				}
+
+				this.init.TL = this.getOffset({x: this.left, y: this.top}, {x: this.left + this.width / 2, y: this.top + this.height / 2}, this.rotate)
+
+				let vector = this.getVector({x: event.clientX, y: event.clientY, width: this.init.width, height: this.init.height})
+				let line = this.getLine({x: event.clientX, y: event.clientY, width: this.init.width, height: this.init.height}, type)
+				document.onmousemove = (event) => {
+					this.resizemove(event, vector, line, type)
+				}
+
+				document.onmouseup = () => {
+					this.isDegrees = false
+					document.onmousemove = null
+					document.onmouseup = null
+					
+				}
+			},
+
+			resizemove (event, vector, line, type) {
+				let disx = event.clientX - this.init.x
+				let disy = event.clientY - this.init.y
+				let tmp = line.A * event.clientX + line.B * event.clientY + line.C
+				if (type !== 'r' || type !== 'l') {
+				if (tmp > 0) {
+						if (type === 'tr' || type === 'bl') {
+							disx = this.getDisxDisy(event, vector).disx
+							disy = -disx / this.init.aspectRatio
+						} else {
+							disy = this.getDisxDisy(event, vector).disy
+							disx = disy * this.init.aspectRatio
+						}
+					} else {
+						if (type === 'tr' || type === 'bl') {
+							disy = this.getDisxDisy(event, vector).disy
+							disx = -disy * this.init.aspectRatio
+						} else {
+							disx = this.getDisxDisy(event, vector).disx
+							disy = disx / this.init.aspectRatio
+						}
+					}
+				}
+
+				if (event.shiftKey) {
+					disx = this.getDisxDisy(event, vector).disx
+					disy = this.getDisxDisy(event, vector).disy
+				}
+				if (type === 'tl') {
+					this.resizeTL(disx, disy)
+				} else if (type === 'tr') {
+					this.resizeTR(disx, disy)
+				} else if (type === 'bl') {
+					this.resizeBL(disx, disy)
+				} else if (type === 'br') {
+					this.resizeBR(disx, disy)
+				} else if (type === 'rotate') {
+					if (disx !== 0 || disy !== 0) {
+						this.resizeRotate(event)
+					}
+				}
+			},
+
+			resizeTL (disx, disy) {
+				let width = this.init.width - disx
+				let height = this.init.height - disy
+				let point = {x: this.init.left, y: this.init.top}
+				let center = {x: this.init.left + width / 2, y: this.init.top + height / 2}
+				let offset = this.getOffset(point, center, this.init.rotate)
+				let disLeft = offset.x - this.init.TL.x
+				let disTop = offset.y - this.init.TL.y
+				let left = this.init.left + disx + disLeft
+				let top = this.init.top + disy + disTop
+				if (width < 0 || height < 0) return
+				this.width = width
+				this.height = height
+				this.top = top
+				this.left = left
+			},
+
+			resizeBL (disx, disy) {
+				let width = this.init.width - disx
+				let height = this.init.height + disy
+				let point = {x: this.init.left, y: this.init.top}
+				let centerFirst = {x: this.init.left + this.init.width / 2, y: this.init.top + height / 2}
+				let centerSecond = {x: this.init.left + width / 2, y: this.init.top + this.init.height / 2}
+				let offsetFirst = this.getOffset(point, centerFirst, this.init.rotate)
+				let offsetSecond = this.getOffset(point, centerSecond, this.init.rotate)
+				let disLeftFirst = offsetFirst.x - this.init.TL.x
+				let disTopFirst = offsetFirst.y - this.init.TL.y
+				let disLeftSecond = offsetSecond.x - this.init.TL.x
+				let disTopSecond = offsetSecond.y - this.init.TL.y
+				let left = this.init.left + disx - disLeftFirst + disLeftSecond
+				let top = this.init.top - disTopFirst + disTopSecond
+				if (width < 0 || height < 0) return
+				this.width = width
+				this.height = height
+				this.top = top
+				this.left = left
+			},
+
+			resizeBR (disx, disy) {
+				let width = this.init.width + disx
+				let height = this.init.height + disy
+				let point = {x: this.init.left, y: this.init.top}
+				let center = {x: this.init.left + width / 2, y: this.init.top + height / 2}
+				let offset = this.getOffset(point, center, this.init.rotate)
+				let disLeft = offset.x - this.init.TL.x
+				let disTop = offset.y - this.init.TL.y
+				let left = this.init.left - disLeft
+				let top = this.init.top - disTop
+				if (width < 0 || height < 0) return
+				
+				this.width = width
+				this.height = height
+				this.top = top
+				this.left = left
+			},
+
+			resizeTR (disx, disy) {
+				let width = this.init.width + disx
+				let height = this.init.height - disy
+				let point = {x: this.init.left, y: this.init.top}
+				let centerFirst = {x: this.init.left + this.init.width / 2, y: this.init.top + height / 2}
+				let centerSecond = {x: this.init.left + width / 2, y: this.init.top + this.init.height / 2}
+				let offsetFirst = this.getOffset(point, centerFirst, this.init.rotate)
+				let offsetSecond = this.getOffset(point, centerSecond, this.init.rotate)
+				let disLeftFirst = offsetFirst.x - this.init.TL.x
+				let disTopFirst = offsetFirst.y - this.init.TL.y
+				let disLeftSecond = offsetSecond.x - this.init.TL.x
+				let disTopSecond = offsetSecond.y - this.init.TL.y
+				let top = this.init.top + disy + disTopFirst - disTopSecond
+				let left = this.init.left + disLeftFirst - disLeftSecond
+				if (width < 0 || height < 0) return
+				this.width = width
+				this.height = height
+				this.top = top
+				this.left = left
+			},
+
+			resizeRotate (event) {
+				let radian = Math.atan2(event.clientY - this.init.centerY, event.clientX - this.init.centerX)
+				let angle = Math.floor(radian * 180 / Math.PI) - 90
+				angle = angle < 0 ? angle + 360 : angle
+				if (angle % 45 >= 42 || angle % 45 <= 3) {
+					angle = Math.round(angle / 45) * 45
+				}
+
+				this.rotate = angle
+			},
+
+			getDisxDisy (event, vector) {
+				let primaryVector = {
+					x: event.clientX - this.init.x,
+					y: event.clientY - this.init.y
+				}
+				let disx = (primaryVector.x * vector.vectorA.x + primaryVector.y * vector.vectorA.y) / Math.sqrt(Math.pow(vector.vectorA.x, 2) + Math.pow(vector.vectorA.y, 2))
+				let disy = (primaryVector.x * vector.vectorB.x + primaryVector.y * vector.vectorB.y) / Math.sqrt(Math.pow(vector.vectorB.x, 2) + Math.pow(vector.vectorB.y, 2))
+				return {
+					disx,
+					disy
+				}
+			},
+
+			getVector (options) {
+				let {x, y, width, height} = options
+				let radian = Math.PI * this.init.rotate / 180
+				let cos = Math.cos(radian)
+				let sin = Math.sin(radian)
+				let dotA = {}
+				let dotB = {}
+				let vectorA = {}
+				let vectorB = {}
+				dotA.x = x - width * cos
+				dotA.y = y - width * sin
+				dotB.x = x + height * sin
+				dotB.y = y - height * cos
+				vectorA.x = x - dotA.x
+				vectorA.y = y - dotA.y
+				vectorB.x = x - dotB.x
+				vectorB.y = y - dotB.y
+				return {
+					vectorA,
+					vectorB
+				}
+			},
+
+			getLine (options, type) {
+				let {x, y, width, height} = options
+				let radian = Math.PI * this.init.rotate / 180
+				let cos = Math.cos(radian)
+				let sin = Math.sin(radian)
+				let dotA = {}
+				if (type === 'br') {
+					dotA.x = x - width * cos + height * sin
+					dotA.y = y - height * cos - width * sin
+				} else if (type === 'bl') {
+					dotA.x = x + width * cos + height * sin
+					dotA.y = y - height * cos + width * sin
+				} else if (type === 'tl') {
+					dotA.x = x + width * cos - height * sin
+					dotA.y = y + height * cos + width * sin
+				} else if (type === 'tr') {
+					dotA.x = x - width * cos - height * sin
+					dotA.y = y + height * cos - width * sin
+				}
+				let A = dotA.y - y
+				let B = x - dotA.x
+				let C = dotA.x * y - x * dotA.y
+				return {
+					A,
+					B,
+					C
+				}
+			},
+
+			getOffset (point, center, angle) {
+				let radian = Math.PI * angle / 180
+				let sin = Math.sin(radian)
+				let cos = Math.cos(radian)
+				if (Math.abs(sin) < Number.EPSILON) sin = 0
+				if (Math.abs(cos) < Number.EPSILON) cos = 0
+				if (1 - Math.abs(sin) < Number.EPSILON) {
+					if (sin < 0) {
+						sin = -1
+					} else {
+						sin = 1
+					}
+				}
+				if (1 - Math.abs(cos) < Number.EPSILON) {
+					if (cos < 0) {
+						cos = -1
+					} else {
+						cos = 1
+					}
+				}
+				let [px, py] = [point.x - center.x, point.y - center.y]
+				let dx = (px * cos - py * sin)
+				let dy = (px * sin + py * cos)
+				return {
+					x: dx + center.x,
+					y: dy + center.y
+				}
+			},
+
+			resizeDir (event, type) {
+				let angle = this.rotate
+				if ((angle >= 337 && angle <= 360) || (angle >= 0 && angle < 22) || (angle >= 157 && angle <= 202)) {
+					if (type === 'tl' || type === 'br') {
+						event.target.style.cursor = 'nw-resize'
+					} else if (type === 'tr' || type === 'bl') {
+						event.target.style.cursor = 'ne-resize'
+					} else if (type === 'l' || type === 'r') {
+						event.target.style.cursor = 'w-resize'
+					} else if (type === 't' || type === 'b') {
+						event.target.style.cursor = 'n-resize'
+					}
+				} else if ((angle >= 22 && angle < 67) || (angle >= 202 && angle < 247)) {
+					if (type === 'tl' || type === 'br') {
+						event.target.style.cursor = 'n-resize'
+					} else if (type === 'tr' || type === 'bl') {
+						event.target.style.cursor = 'w-resize'
+					} else if (type === 'l' || type === 'r') {
+						event.target.style.cursor = 'nw-resize'
+					} else if (type === 't' || type === 'b') {
+						event.target.style.cursor = 'ne-resize'
+					}
+				} else if ((angle >= 67 && angle < 112) || (angle >= 247 && angle < 292)) {
+					if (type === 'tl' || type === 'br') {
+						event.target.style.cursor = 'ne-resize'
+					} else if (type === 'tr' || type === 'bl') {
+						event.target.style.cursor = 'nw-resize'
+					} else if (type === 'l' || type === 'r') {
+						event.target.style.cursor = 'n-resize'
+					} else if (type === 't' || type === 'b') {
+						event.target.style.cursor = 'w-resize'
+					}
+				} else if ((angle >= 112 && angle < 157) || (angle >= 292 && angle < 337)) {
+					if (type === 'tl' || type === 'br') {
+						event.target.style.cursor = 'w-resize'
+					} else if (type === 'tr' || type === 'bl') {
+						event.target.style.cursor = 'n-resize'
+					} else if (type === 'l' || type === 'r') {
+						event.target.style.cursor = 'ne-resize'
+					} else if (type === 't' || type === 'b') {
+						event.target.style.cursor = 'nw-resize'
+					}
+				}
+			}
+
+			
+		}
+	})
+</script>
+</html>
