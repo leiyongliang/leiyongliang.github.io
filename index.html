@@ -1,209 +1,35 @@
-<style>
-body{
-    overflow: hidden;
-}
-    div{
-        position: absolute;
-        height: 500px;
-        width: 500px;
-        outline: 1px dashed red;
-        cursor: move;
-    }
-    span{
-        position: absolute;
-        width: 14px;
-        height: 14px;
-        border-radius: 7px;
-        border: 1px solid red;
-        background: #fff;
-        box-sizing: border-box;
-    }
-    #resize1{
-        left: -7px;
-        top: -7px;
-        cursor: nw-resize;
-    }
-    #resize2{
-        right: -7px;
-        top: -7px;
-        cursor: ne-resize;
-    }
-    #resize3{
-        right: -7px;
-        bottom: -7px;
-        cursor: nw-resize;
-    }
-    #resize4{
-        left: -7px;
-        bottom: -7px;
-        cursor: ne-resize;
-    }
-    #rotate{
-        left: 50%;
-        top: 100%;
-        margin: 20px 0 0 -7px;
-        cursor: pointer;
-    }
-    #rotate::before{
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: -20px;
-        width: 0;
-        height: 20px;
-        margin-left: -1px;
-        border-left:1px dashed red;
-    }
-</style>
-
-
-<div id="polyline">
-<svg width="100%" height="100%" version="1.1"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
-<polygon fill="#000000" points="146.4,500 138.5,361.5 0,353.5 92.4,250 0,146.4 138.5,138.5 146.4,0 250,92.4 353.5,0 361.5,138.5 500,146.4 407.7,250 500,353.5 361.5,361.5 353.5,500 239,408.9"></polygon>
-</svg>
-<span id="resize1"></span>
-<span id="resize2"></span>
-<span id="resize3"></span>
-<span id="resize4"></span>
-<span id="rotate"></span>
-</div>
-<script>
-var polyline =  document.getElementById('polyline');
-   var x, y, t, l;
-window.onload = function () {
-   polyline.addEventListener('mousedown',function(event) {
-        x = event.clientX;
-        y = event.clientY;
-        t = polyline.offsetTop;
-        l = polyline.offsetLeft;
-        polyline.addEventListener('mousemove',move)
-    })
-    polyline.addEventListener('mouseup',function(){
-        polyline.removeEventListener('mousemove',move)
-    })
-
-    var rz1 = new Resize('resize1', 1);
-    var rz2 = new Resize('resize2', 2);
-    var rz3 = new Resize('resize3', 3);
-    var rz4 = new Resize('resize4', 4);
-    var ro = new Resize('rotate', 5);
-
-}
-function move(event) {
-    var disx = event.clientX - x;
-    var disy = event.clientY - y;
-    var top = parseInt(t) + parseInt(disy), left = parseInt(l) + parseInt(disx);
-    polyline.style.top = top + 'px';
-    polyline.style.left = left + 'px';
-}
-
-function Resize(id, dir) {
-    this.dom = document.getElementById(id);
-    this.disX = 0;
-    this.disY = 0;
-    this.clickX = 0;
-    this.clickY = 0;
-    this.width = 0;
-    this.height = 0;
-    this.top = 0;
-    this.left = 0;
-    this.dir = dir;
-    this.centery
-    this.centerx
-    var _this = this;
-
-    this.dom.onmousedown = function(e) {
-        _this.fndown(e);
-        return false;
-    }
-}
-Resize.prototype.fndown = function(e) {
-    e.stopPropagation();
-    this.clickX = e.clientX;
-    this.clickY = e.clientY;
-    this.width = polyline.clientWidth;
-    this.height = polyline.clientHeight;
-    this.top = polyline.offsetTop;
-    this.left = polyline.offsetLeft;
-    this.centery = this.top + this.height / 2
-    this.centerx = this.left + this.width  / 2
-    var _this = this;
-
-
-    document.onmousemove = function (e) {
-        _this.fnmove(e);
-    }
-
-    document.onmouseup = function (e) {
-        _this.fnup(e);
-    }
-}
-
-Resize.prototype.fnmove = function (e)  {
-    this.disX = e.clientX - this.clickX;
-    this.disY = e.clientY - this.clickY;
-    var left = parseInt(this.left)
-    var top = parseInt(this.top)
-    if (this.dir == 1) {
-        console.log(this.left)
-        polyline.style.width = this.width - this.disX + 'px';
-        polyline.style.height = this.height - this.disX + 'px';
-        left = parseInt(this.left) + parseInt(this.disX);
-        top = parseInt(this.top) + parseInt(this.disX);
-    }
-    else if (this.dir == 2) {
-        polyline.style.width = this.width + this.disX + 'px';
-        polyline.style.height = this.height + this.disX + 'px';
-        top -= parseInt(this.disX);
-
-    }
-    else if (this.dir == 3) {
-        polyline.style.width = this.width + this.disX + 'px';
-        polyline.style.height = this.height + this.disX + 'px';
-    }
-    else if (this.dir == 4){
-        polyline.style.width = this.width - this.disX + 'px';
-        polyline.style.height = this.height - this.disX + 'px';
-
-        left += parseInt(this.disX)
-    }
-
-    else if (this.dir == 5) {
-        var radian = Math.atan2(event.pageY - this.centery, event.pageX - this.centerx)
-        var angle = Math.floor((radian) * 180 / Math.PI) - 90
-        angle = angle < 0 ? angle+ 360 : angle
-       if (angle > 42 && angle < 48) {
-           angle = 45
-       }
-       else if (angle > 87 && angle < 93) {
-           angle = 90
-       }
-       else if (angle > 132 && angle < 138) {
-           angle = 135
-       }
-       else if (angle > 177 && angle < 183) {
-           angle = 180
-       }
-       else if (angle > 222 && angle < 228) {
-           angle = 225
-       }
-       else if (angle > 267 && angle < 273) {
-           angle = 270
-       }
-       else if (angle > 312 && angle < 318) {
-           angle = 315
-       }
-       else if (angle > 357 || angle < 3) {
-           angle = 0
-       }
-        polyline.style.transform = 'rotateZ('+ angle +'deg)';
-    }
-    polyline.style.top = top + 'px';
-    polyline.style.left = left + 'px';
-}
-
-Resize.prototype.fnup = function () {
-    document.onmousemove = null;
-    document.onmouseup = null;
-}
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>小项目展示</title>
+	<style type="text/css">
+		a{
+			display: block;
+			height: 40px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<a href="https://leiyongliang.github.io/Homepage">第一版个人主页</a>
+		<a href="http://yoler.me">第二版个人主页</a>
+		<a href="http://leiyongliang.com">新版个人主页</a>
+		<a href="https://leiyongliang.github.io/SN">在线留言板</a>
+		<a href="https://leiyongliang.github.io/ball">模拟屏保小气球</a>
+		<a href="https://leiyongliang.github.io/byc">百叶窗切换图片效果</a>
+		<a href="https://leiyongliang.github.io/drag">react拖动排序</a>
+		<a href="https://leiyongliang.github.io/edit">在线编辑器，所见即所得</a>
+		<a href="https://leiyongliang.github.io/grid">拼图</a>
+		<a href="https://leiyongliang.github.io/guides">参考线</a>
+		<a href="https://leiyongliang.github.io/keycode">获取键盘按键对应的ASCII码</a>
+		<a href="https://leiyongliang.github.io/msgBoard">第一款react留言板</a>
+		<a href="https://leiyongliang.github.io/pintu">第一款拼图</a>
+		<a href="https://leiyongliang.github.io/puzzle">升级版拼图</a>
+		<a href="https://leiyongliang.github.io/rectSelect">框选</a>
+		<a href="https://leiyongliang.github.io/screenSwitch">移动端页面切换</a>
+		<a href="https://leiyongliang.github.io/rainy">雨天</a>
+		<a href="https://leiyongliang.github.io/scroll">模拟页面滚动</a>
+		<a href="https://leiyongliang.github.io/transform">图形拉伸移动旋转</a>
+	</div>
+</body>
+</html>
