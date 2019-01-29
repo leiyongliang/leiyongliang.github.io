@@ -1,0 +1,14 @@
+<view class="msg">
+  <view class="title">
+    <text>{{title}}</text>
+  </view>
+  <view class="author">
+    <text>{{dynasty}}·{{author}}</text>
+  </view>
+  <view wx:for="{{content}}" wx:key="index" class="item">
+    <text class="item-text">{{item}}</text>
+  </view>
+  <view class='translate' bindtap="translate">
+    <text>{{btn}}</text>
+  </view>
+</view>
