@@ -5,11 +5,11 @@
   const FRAME_RATE = 60
   const PARTICLE_NUM = 2000
   const RADIUS = Math.PI * 2
-  const CANVASWIDTH = 1000
+  const CANVASWIDTH = 1200
   const CANVASHEIGHT = 150
   const CANVASID = 'canvas'
 
-  let texts = ['蔚蓝星空', '我独自仰望', '此刻', '她是不是也在看着', '星光闪烁', '什么时候会遇到你', '那晚', '我们初次见面', '微风和煦 月色真美', '欧佳撰 你好哇', '按ctrl + f 输入字母o有惊喜！！']
+  let texts = ['蔚蓝星空', '我独自仰望', '此刻', '她是不是也在看着', '星光闪烁', '什么时候会遇到你', '那晚', '我们初次见面', '微风和煦 月色真美', '欧佳撰 你好哇', '按ctrl + f 输入9有惊喜！']
 
   let canvas,
     ctx,
