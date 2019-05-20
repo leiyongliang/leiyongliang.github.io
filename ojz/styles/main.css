@@ -119,4 +119,5 @@ a:hover {
     align-items: center;
     font-family: '微软雅黑';
     user-select: none;
+    color: rgba(0, 0, 0, 0);
 }
