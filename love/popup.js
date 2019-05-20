@@ -38,7 +38,7 @@
     });
     var lnglat = new AMap.LngLat(117.263056, 31.864324);
     document.getElementById('dis').innerHTML = '他离你的距离：'+ lnglat.distance([114.083887, 22.548902]) + '米'
-    var startT = new Date('2017/1/1').getTime()
+    var startT = new Date('2018/4/17').getTime()
     setInterval(function() {
         var dist = new Date().getTime() - startT
         var days=Math.floor(dist/(24*3600*1000))

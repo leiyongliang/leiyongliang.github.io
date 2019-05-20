@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>查询</title>
+	<style type="text/css">
+		body, html{
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.time{
+
+		}
+	</style>
+</head>
+<body>
+	<div id="time">
+		
+	</div>
+
+</body>
+<script type="text/javascript">
+	var startT = new Date('2018/4/17').getTime()
+	setInterval(function() {
+        var dist = new Date().getTime() - startT
+        var days=Math.floor(dist/(24*3600*1000))
+        var leave1=dist%(24*3600*1000)    //计算天数后剩余的毫秒数  
+        var hours=Math.floor(leave1/(3600*1000))
+        var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数  
+        var minutes=Math.floor(leave2/(60*1000))
+        var leave3=leave2%(60*1000)      //计算分钟数后剩余的毫秒数  
+        var seconds=Math.round(leave3/1000)
+        document.getElementById('time').innerHTML = '我们在一起：'+days+" 天 "+hours+" 小时 "+minutes+" 分钟 "+seconds+" 秒"
+    }, 1000)
+</script>
+</html>
